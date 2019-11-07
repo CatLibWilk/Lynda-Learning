@@ -23,3 +23,22 @@ print(x) ==> '1'
 - `dictionary` in some languages
 - `associative array` that maps keys to their associated values with hash function 
 - typically faster than other types of table lookup structures
+
+# Chpt. 3 - recursion (3.1)
+- `recursion` when a function calls itself from inside itself
+- each time the function is called the old arguments are saved ("call stack")
+-  simple example:
+    def countdown(x):
+        if x == 0:
+            print("Done!")
+            return
+        else:
+            print(x, "...")
+            countdown(x-1)
+
+
+    countdown(5)
+
+# Chpt. 4 Sorting Data
+- bubble sort: first two values compared, if 1 > 2, they swap and continue, until list is in order
+- nested for-loops generally indicate Big O time complexity of n2 (quadratic) 
