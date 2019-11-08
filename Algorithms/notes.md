@@ -42,3 +42,79 @@ print(x) ==> '1'
 # Chpt. 4 Sorting Data
 - bubble sort: first two values compared, if 1 > 2, they swap and continue, until list is in order
 - nested for-loops generally indicate Big O time complexity of n2 (quadratic) 
+
+- merge sort: uses recursion, takes set of data and breaks into parts 
+    - good for large datasets big o = log n
+    items = [6, 20, 8, 19, 56, 23, 87, 41, 49, 53]
+    ex.
+    def mergesort(dataset):
+        if len(dataset) > 1:
+            mid = len(dataset) // 2
+            leftarr = dataset[:mid]
+            rightarr = dataset[mid:]
+
+            # recursively break down the arrays
+            mergeSort(leftarr)
+            mergeSort(rightarr)
+
+            # now perform the merging
+            i=0 # index into the left array
+            j=0 # index into the right array
+            k=0 # index into merged array
+
+            # while both arrays have content
+            while i < len(leftarr) and j < len(rightarr):
+                if leftarr[i] < rightarr[j]:
+                    dataset[k] = leftarr[i]
+                    i += 1
+                else:
+                    dataset[k] = rightarr[j]
+                    j += 1
+                k += 1
+
+            # if the left array still has values, add them
+            while i < len(leftarr):
+                dataset[k] = leftarr[i]
+                i += 1
+                k += 1
+
+            # if the right array still has values, add them
+            while j < len(rightarr):
+                dataset[k] = rightarr[j]
+                j += 1
+                k += 1
+- quick sort:
+    - also divides data for processing and uses recursion
+    - operates on data in-place (no extra memory reqs)
+
+# Chpt. 5 Searching for Data
+- searching in an unordered list:
+    -Big O linear time complexing
+    -basically for i in range, if i == sth, return i
+
+- searching in an ordered list:
+    - if ordered, can perform binary search
+    - get upper and lower indexes, calculate midpoint, and keep excluding values until find
+    - ex
+        def binarysearch(item, itemlist):
+        # get the list size
+        listsize = len(itemlist) - 1
+        # start at the two ends of the list
+        lowerIdx = 0
+        upperIdx = listsize
+
+        while lowerIdx <= upperIdx:
+            # calculate the middle point
+            midPt = (lowerIdx + upperIdx)// 2
+
+            # if item is found, return the index
+            if itemlist[midPt] == item:
+                return midPt
+            # otherwise get the next midpoint
+            if item > itemlist[midPt]:
+                lowerIdx = midPt + 1
+            else:
+                upperIdx = midPt - 1
+
+        if lowerIdx > upperIdx:
+            return None
