@@ -12,3 +12,12 @@
     - ex. hash function generates hash of a password, login puts your input through h-function to see if it matches hash, but doesn't de-hash the hash value stored.
 
 - python has `GetHashCode` function
+
+# Chpt. 6 Sets/trees (test membership)
+- sets take an object and generate a hash of it, rather than a hash table with an object and hash as key
+ - dont use sets for data retrieval
+- in python3:
+ - variable = set(['one', 'tow', 'three'])
+
+- trees
+ - structure is a root node with parent/child nodes below
