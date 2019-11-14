@@ -15,9 +15,12 @@
 
 # Chpt. 6 Sets/trees (test membership)
 - sets take an object and generate a hash of it, rather than a hash table with an object and hash as key
- - dont use sets for data retrieval
+  - dont use sets for data retrieval
 - in python3:
- - variable = set(['one', 'tow', 'three'])
+  - variable = set(['one', 'tow', 'three'])
 
 - trees
- - structure is a root node with parent/child nodes below
+  - structure is a root node with parent/child nodes below
+- binary search tree
+  - constraint: max two child nodes/parent, left child must be less than parent, right child more than parent
+  - for javascript or python, need to use third-party library
