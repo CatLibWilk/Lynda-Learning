@@ -15,12 +15,21 @@
 
 # Chpt. 6 Sets/trees (test membership)
 - sets take an object and generate a hash of it, rather than a hash table with an object and hash as key
-  - dont use sets for data retrieval
+    - dont use sets for data retrieval
 - in python3:
-  - variable = set(['one', 'tow', 'three'])
+    - variable = set(['one', 'tow', 'three'])
 
 - trees
-  - structure is a root node with parent/child nodes below
+    - structure is a root node with parent/child nodes below
 - binary search tree
-  - constraint: max two child nodes/parent, left child must be less than parent, right child more than parent
-  - for javascript or python, need to use third-party library
+    - constraint: max two child nodes/parent, left child must be less than parent, right child more than parent
+    - for javascript or python, need to use third-party library
+
+- heaps: collection of objects stored as binary search tree, top to bottom, left to right
+    - always fill in level before descending
+    - min heap/max heap: either root node will be max or min in collection
+    - often used to implement priority queues
+    - pros/cons of tree structure: 
+        - sets: used to check if something exists in set
+        - BST: good for sth where need to insert, delete, search, access frequently. Has great speed (if balanced tree)
+            - but creation, management, balancing are computational burdens
