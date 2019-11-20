@@ -1,7 +1,7 @@
 # Chpt. 1
 - git add stages a document/documents
     - use git checkout [filename] to discard changes to a file in the working directory (ie. pulls the version that is in the staging environment to working environment)
-- git reset HEAD [filename] will remove a file from the staging area (`un-add`)
+- git reset HEAD [filename] will remove a file from the staging area (`pull back from commit`)
 
 - deleting files
     - git checkout [filename] will take from staging and put back in working if you've deleted a file
@@ -20,3 +20,8 @@
     - git checkout [branchname] will put you in the new branch to sandbox stuff
     - change branch name: git branch -m [original_branch_name] [newname]
     - delete: git branch -D [branchname]
+
+    - revert to second-to-last commit:
+        - git revert [hash_of_current_commit]
+        - in prompt: I to enter insert mode, make note, esc to exit insert mode, ctrl+q, then "w!' to save, then ctrl+q! to exit
+        - now current commit will be the one you reverted to
