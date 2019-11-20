@@ -14,3 +14,9 @@
     - use git checkout [hash] to return to the given commit in `detached head state`
     - detached head state: 'sandbox' version of project starting at the given commit
         - to save the changes you make, git add/commit, then use git branch [new_branch_name] [partial_hash_given] 
+
+- State control with branches
+    - git branch [branchname] will create a branch but keep state in current, so like a save point
+    - git checkout [branchname] will put you in the new branch to sandbox stuff
+    - change branch name: git branch -m [original_branch_name] [newname]
+    - delete: git branch -D [branchname]
