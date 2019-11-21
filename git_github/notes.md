@@ -25,3 +25,21 @@
         - git revert [hash_of_current_commit]
         - in prompt: I to enter insert mode, make note, esc to exit insert mode, ctrl+q, then "w!' to save, then ctrl+q! to exit
         - now current commit will be the one you reverted to
+
+# Chpt. 2 Working with Projects
+- Cloning Branches
+    - git clone only downloads the master, but has all the info about other branches
+    - `git branch -a` will show names of other branches
+    - to download `git checkout -b [a_name_you_give] [name_of_branch_in_list]`
+        - ex. git checkout -b 02_01 origin/02_01
+    - to pull all the branches and master at once:
+        - `git clone --mirror [repo_url] .git`
+            - ex. git clone --mirror http://github.com/awpenn/id_db.git .git (yes, .git 2x)
+        - this will clone 'bare repo', which is empty except for the .git directory that tracks all the files, then:
+        - `git config --bool core.bare false` , then:
+        - `git reset --hard`
+    
+    - using a github branch as a template for another project
+        - `git clone -b [branch_name] [git_repo_url]`
+        - `rm -rm .git` ie. deleting .git folder essentially makes it no longer a git repo
+        - then `git init` initializes it as a new repo and a new project
