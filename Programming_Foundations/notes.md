@@ -20,3 +20,19 @@
     - just those required for a minimum viable product
 - FURPS requirements
     - Functionality, Useability, Reliability, Performance and Supportability
+
+# Chpt. 3 Use Cases/User Stories
+- Use Case has 3 components
+    - title: what is the goal?
+    - primary actor: who desires it? (can be user, or another system working on system)
+    - success scenario: how is it accomplished?
+    - can also describe as a series of steps toward successful conclusions
+    - additional details: extensions(steps for alternate flows, e.g. if something goes wrong) and preconditions
+
+- identifying actors
+    - people AND external systems
+    - actors interacting with it to meet desired outcome, but also others that need to interact with (maintenance and etc.)
+- identifying scenarios
+    - emphasis user-focused goals based on intent
+- diagramming use cases
+    - diagram includes several use cases and actors, with lines drawn showing all use-relationships between the two
