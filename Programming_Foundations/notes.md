@@ -36,3 +36,22 @@
     - emphasis user-focused goals based on intent
 - diagramming use cases
     - diagram includes several use cases and actors, with lines drawn showing all use-relationships between the two
+
+# Chpt. 4 Domain Modeling
+- after analysis and creation of use-cases, develop conceptual model which identifies the most important objects in the application and how the are related.
+    -  pick out nouns from use cases to determine `potential` objects
+
+- identify object responsibilities
+    - select verb statements from use cases
+    - objects should be responsible for self
+        - ex. player steers car, but shouldn't have method in user class to directly change state in car, rather should ask car to change its directional state
+    - avoid global master objects
+        - responsibilities should be distributed among system objects and not stored in one master `god-object`
+- CRC (Class, Responsibility, Collaborators) organization
+    - can organize thinking by creating CRC cards giving class, its reponsibilities, and the other objects it interacts with
+
+# Class Diagrams
+- class entities in the diagram give class name, its attributes, and its behaviors
+    - attributes: [attributeName]: [datatype] e.g. healthLevel: integer
+    - behaviors: the methods = [methodName](params): [return_data_type] e.g. getHealth(): Integer, raiseHealth(Integer)
+    - +/- symbols before attributes and behaviors in the diagram indicate their public/private nature (encapsulation )
