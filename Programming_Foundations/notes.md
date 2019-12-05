@@ -55,3 +55,43 @@
     - attributes: [attributeName]: [datatype] e.g. healthLevel: integer
     - behaviors: the methods = [methodName](params): [return_data_type] e.g. getHealth(): Integer, raiseHealth(Integer)
     - +/- symbols before attributes and behaviors in the diagram indicate their public/private nature (encapsulation )
+
+- Instantiating Classes
+    build constructor method within class (with same name as class) to create objects at instantiation with values in place for their attributes. 
+            example.
+            class Spaceship: 
+                name = "" 
+            
+                # default constructor 
+                def __init__(self): 
+                    self.name = "Defaulticus"
+            
+                # a method for printing data members 
+                def print_Spaceship(self): 
+                    print(self.name) 
+        
+        
+        # creating object of the class 
+        obj = Spaceshib() 
+        
+        # calling the instance method using the object obj 
+        obj.print_Spaceship()
+
+- Overloading
+    - creating multiple constructor methods
+        - class can have multiple methods with same name, but with different params
+            - e.g. one with no args, one that takes an arg
+    - no overloading in Python
+
+- static variables/methods
+    - variables/methods shared across all objects in a class
+    - in python, these are variables declared within a class but outside of a method
+    - so if have class Spaceship, and instances spaceship1, spaceship2, accessing a static variable for all = Spaceship.variable vs. spaceship1.name spaceship2.name or similar
+    - in Python, have class and static methods, with decorators @staticmethod @classmethod
+        - both are bound to class not instantiated object of class
+        - class methods can access class state, static cannot
+    
+    - Inheritence
+        - python: class subClass(superClass) (class being inherited from in parens)
+        - overriding (depends on language): where something in subclass overrides that in inherited
+        - calling super vs. subclass methods: e.g. python :super().methodName()
