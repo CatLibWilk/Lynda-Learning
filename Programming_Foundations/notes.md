@@ -95,3 +95,39 @@
         - python: class subClass(superClass) (class being inherited from in parens)
         - overriding (depends on language): where something in subclass overrides that in inherited
         - calling super vs. subclass methods: e.g. python :super().methodName()
+    
+    - abstract and concrete classes
+        - abstract classes never get instantiated, they exist only to be inherited from
+            - e.g. Spaceship class used to build different types of spaceship
+            - abstract classes cant be implemented because they have at least one abstract method (declared with method signature but not actually implemented)
+                - e.g. superclass has setShield and move functions, all subclasses will use the same setShield, so inherits and no need to declare in subclass definition, but may move differently so will have to define own move methods
+    
+    - Interfaces
+        - method of abstraction
+        - list of methods for class to implement (doesnt contain any actual behavior)
+        - interfaces represent a capability, abstract classes represent a type 
+        - classes can inherit from multiple interfaces
+    
+    - Aggregation
+        - `has a` relationship ('fleet has a spaceship', where 'a' implies 'many')
+        - destroying the aggregation object doesn't destroy the child objects
+
+    - Composition
+        - like aggregation, but destroying the composition destroys the children
+
+    ## Chpt. 7
+        - Python doesnt exactly support interfaces, but does by way of abstract classes
+    
+    - SOLID developmnet principles
+        - Single responsibility principle: class should only have one responsibility (anti 'god-object')
+        - open/closed principle: 
+        - liskov substitution
+        - interface segregation
+        - dependency inversion
+
+    - DRY principle
+        - Don't Repeat Yourself
+    
+    - Design Patterns
+        - re-usable form of a solution to common design problems
+        - see book: `Design Patterns: Elements of Reusable Object-Oriented Software`
