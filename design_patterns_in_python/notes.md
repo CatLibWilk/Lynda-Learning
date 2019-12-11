@@ -63,9 +63,35 @@
             shape.draw()
             shape.erase()
 
-- 2. Abstract factories
+- 2. Abstract factories (exfiles 2_04)
     - user expects family of related objects at runtime, but doesn't know which family until runtime
 
-- 3. Singleton: object-oriented way of providing global variables 
+- 3. Singleton: object-oriented way of providing global variables (exfiles 2_06)
     - allow only one object to be instantiated from a class
     - can act as cache of info to be shared by various objects in system, so dont have to retrieve from source every time
+
+- 4. Builder (exfiles 2_08)
+    - design pattern solution to 'telescoping constructor' anti-pattern
+        - ie. problem occuring when trying to build complex object with excessive number of constructors
+    - partitions building a complex object into 4 different roles
+        - director  
+        - abstract builder (Provides interfaces)
+        - concrete builder (implements interfaces)
+        - product - represents actual object being built
+
+- 5. Prototype(exfiles 2_10)
+    - clones objects according to prototypical instance
+        - useful for creating many identical objects individually
+    - make class Prototype with 4 methods
+        - one instantiating an object dict, two to add/remove objects to dict with name argument as key
+        - another to clone using imported module `copy` as `copy.deepcopy(self._objects.get(name))` [`where self._objects is dict created in __init__ method at top`]
+
+- 6. Decorators (3_02)
+    - adds additional features to existing function
+    - uses `@` symbol
+
+- 7. Proxy (3_04)
+    - useful when dealing with resource-intensive object
+    - goal is to postpone object creation until absolutely necessary
+    - need for placehold that creates object if necessary
+    - clients interact with proxy object until resource-intensive object becomes available
