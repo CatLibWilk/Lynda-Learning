@@ -95,3 +95,18 @@
     - goal is to postpone object creation until absolutely necessary
     - need for placehold that creates object if necessary
     - clients interact with proxy object until resource-intensive object becomes available
+
+- 8 Adapter(3_06)
+    - adapts interface of class into one the client is expecting
+        - usage ex.: incompatible interface between client and server
+    - can have individualized method names in classes that do the same thing, running through adapter could generalize them
+        - e.g. speak_english(), speak_korean() ==> speak()
+
+- 9 Composite(3_08)
+    - maintains tree data structure to represent part/whole relationships
+    - ex. = creating menu and submenu items
+    - three parts: 
+        - Component: abstract class
+        - Child: concrete class inheriting from component
+        - Composite: concrete class inheriting from component
+    
