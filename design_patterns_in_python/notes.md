@@ -131,8 +131,11 @@
 - 13 Iterator (4_06): allows client sequential access to elements of aggregate object without exposing underlying structure
     - isolates access and traversal feature of an aggregreate obj and tracks objects being traversed.
 
-- 14 Strategy: offers family of interchangeable algorithms to a client
+- 14 Strategy (4_08): offers family of interchangeable algorithms to a client
     - there is often a need for dynamically changing the behavior of an object.
         - so strategy class is offered with default behavior, and then when needed, another variation of strategy offered by dynamically replacing default method with new one.
         - abstract strategy class with default behaviors, concrete strategy classes with new behaviors
         - requires `types` module from python library
+        -   ```if function:
+        	        self.execute = types.MethodType(function, self)```
+            used to say that "if a reference to a function is provided, replace the `execute` function in this class with the passed in function"
