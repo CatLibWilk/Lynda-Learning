@@ -8,12 +8,6 @@ class Subject(object): #Represents what is being 'observed'
 		if observer not in self._observers: #If the observer is not already in the observers list
 			self._observers.append(observer) # append the observer to the list
 
-	def detach(self, observer): #Simply remove the observer
-		try:
-			self._observers.remove(observer)
-		except ValueError:
-			pass
-
 	def notify(self, modifier=None):
 		for observer in self._observers: # For all the observers in the list
 			if modifier != observer: # Don't notify the observer who is actually updating the temperature 
@@ -25,11 +19,13 @@ class Core(Subject): #Inherits from the Subject class
 		Subject.__init__(self)
 		self._name = name #Set the name of the core
 		self._temp = 0 #Initialize the temperature of the core
-
+	
+	## adding this decorator makes a getter function for the value
 	@property #Getter that gets the core temperature
 	def temp(self):
 		return self._temp
 
+	## AW - `@[METHODNAME].setter` is pythonic, party of the @property decorator above.  
 	@temp.setter #Setter that sets the core temperature
 	def temp(self, temp):
 		self._temp = temp

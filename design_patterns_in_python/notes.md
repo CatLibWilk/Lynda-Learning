@@ -86,6 +86,8 @@
         - one instantiating an object dict, two to add/remove objects to dict with name argument as key
         - another to clone using imported module `copy` as `copy.deepcopy(self._objects.get(name))` [`where self._objects is dict created in __init__ method at top`]
 
+# Structural Patterns
+
 - 6. Decorators (3_02)
     - adds additional features to existing function
     - uses `@` symbol
@@ -114,5 +116,16 @@
     - want to separate the abstractions into two class hierarchies
     - n.b. dont really get it. see: https://www.giacomodebidda.com/bridge-pattern-in-python/
 
-11 Observer(4_02): est 1:n relationship between subject object and many observer objects
+# Behavioral Patterns
+- 11 Observer(4_02): est 1:n relationship between subject object and many observer objects
     - when change occurs in subject, registered observers need to be notified 
+    - often used for the specific case of changes based on other object’s change of state, but is also the basis of event management.
+    - `subject` is the thing being observered, and it holds the list of things observing it (ie. `self._observers = []` to start)
+        - will have add and remove functions for dealing with observers, and also the notify function (observed objects notify  observers when something occurs)
+        - a concrete class will inherit from the abstract `Subject` class, and will have getters and setters for values.  Setter will make change and call notify() function inherited from Subject
+        - an object based on an observing class will have some updating function that gets called in the Subject class' notify() function
+
+- 12 Visitor (4_04): add new features to existing class hierarchy without changing it (ie. adding new operations dynamically with minimal change)
+    - has class for thing being visited, with `accept` method that accepts a visitor and calls a `visit` method defined by the Visitor.  this `visit` method in-turn calls a method defined in the `visited` class 
+
+- 13 Iterator (4_06): 
