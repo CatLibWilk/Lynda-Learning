@@ -109,4 +109,10 @@
         - Component: abstract class
         - Child: concrete class inheriting from component
         - Composite: concrete class inheriting from component
-    
+
+- 10 Bridge(3_10): helps deal with complicated class hierarchy, esp. when implementation-specific classes are mixed with implementation-independent ones
+    - want to separate the abstractions into two class hierarchies
+    - n.b. dont really get it. see: https://www.giacomodebidda.com/bridge-pattern-in-python/
+
+11 Observer(4_02): est 1:n relationship between subject object and many observer objects
+    - when change occurs in subject, registered observers need to be notified 
