@@ -139,3 +139,7 @@
         -   ```if function:
         	        self.execute = types.MethodType(function, self)```
             used to say that "if a reference to a function is provided, replace the `execute` function in this class with the passed in function"
+
+- 15 Chain of Responsibility (4_10): allows for different possibilities of processing for a request
+    - decouples request and its processing
+    - define a series of handlers that each determine if they can process the request before (if cant) pushing it on to `successor` handler
