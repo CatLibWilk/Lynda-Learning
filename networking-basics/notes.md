@@ -77,3 +77,55 @@
     - LAN, WLAN, PAN
         - LAN: Local area network
             - limited in size (room up to a building generally)
+            - usually use twisted-pair cable to connect devices
+            - standards recognize hierarchical star topology 
+        - WLAN: Wireless LAN
+
+        - PAN: Personal Area Network
+            - typically connected via bluetooth technology
+            - limited range of ~30 feet
+
+    -SCADA/ICS and Medianet technologies
+        - SCADA/ICS: Supervisory Control and Data Acquisition / Industrial Control System
+            - both refer to technologies used to control industrial application
+            - SCADA: systems that span large geographical areas 
+            - ICS: refers to smaller systems, e.g. control for a factory or sth,
+        
+        - Medianet: networks optimized for distributing large video applications or similiar tech
+            - uses smart bandwidth detection to adjust for higher/lower bandwidth devices
+
+# Chpt 3 OSI Model
+    - OSI: Open Systems Interconnection Reference Model
+    - 7 Layers: Application, Presentation, Session, Transport, Network, Data Link, Physical layers
+        - "All People Seem To Need Data Processing" (pneumonic)
+    
+    - 1. Physical Layer
+        - concerned with physical transmission of data across network
+            - defines encoding methods for tranporting data, how bits are encoded on media
+            - defines specifications for media usage (what kinds permitted for different devices)
+            - defines how physical connections made between media
+    
+    - 2. Data Link Layer
+        - provides error-free transmission from node to another over physical media
+        - in charge of degree of traffic-control
+        - responsible for frame acknowledgement
+        - can detect and recover from errors in physical layer
+        -responsible for frame delimiting (defining boundaries of the frame)
+        - error checking: checks recieved frames for data integrity
+        - determines when a node is allowed to use physical media
+    
+    - 3. Network Layer
+        - controls operations of the subnetwork its located on
+            - determines best physical path for data
+                - uses network conditions and priority of service as metrics 
+            - function provided
+                - routing: routes frames along best paths
+                - subnet traffic control: allows routers to send instructions to eachother
+                - frame fragmentation: determines size of frame used by routers downstream, if necessary will break up data to  meet this size 
+                - logical-physical address mapping
+                - subnet usage accounting: tracks frames as they're forwarded by subnet-intermediate system
+            - layer builds specialized headers used by network layer on other devices to route packets
+                - these relieve higher OSI layers from needing to know transmission and switching data
+            - network layer users protocols on lower layers to send data to destinations separated by intermediate nodes
+                - data sent from intermediate node to next intermediate node 
+
