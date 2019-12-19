@@ -129,3 +129,47 @@
             - network layer users protocols on lower layers to send data to destinations separated by intermediate nodes
                 - data sent from intermediate node to next intermediate node 
 
+    - 4. Transport Layer
+        - ensures message delivery without loss or duplication
+        - relieves higher protocols of concern for transfer of data 
+        - Message segmentation: accepts messages from session layer above in entirety, splits into smaller units to be sent
+            -  imposes message size limits on network layer protocols below
+            - prepares header for each unit
+                - contain start and end flags
+                - contains sequence information
+            - reassembles once its reached destination
+        - other functions
+            - message acknowledgement
+            - message traffic control
+            - session multiplexing: ability to break incoming data into different datastreams (sessions), so transport layer sorts messages to correct session
+    
+    - 5. Session Layer
+        - responsible for establishing sessions between processes running on different computers.
+            - to accomplish, responsible for:
+                - session establishment, maintenence, termination
+                    - allows processes to est. connection, use connection
+                - session support
+                    - provides security for connection
+                    - provides name recognition to keep different sessions separate
+    
+    - 6. Presentation Layer                    
+        - responsible for how data formatted to be presented to application layer
+        - translator for network
+        - translation functions
+            - character-code translation
+            - data conversion
+        - responsible for data compression and encryption
+    
+    - 7. Application Layer
+        - serves as window to access network services
+
+    - Encapsulation/De-encapsulation
+        - each OSI layer adds a header to data, and creates a unit of data called encapsulation unit
+            - process of moving data down the model
+            - process of moving data up the model (physical to application) is de-encapsulation
+            - for Application to session layers, unit called data
+            - transport layer converts data to segment
+            - network layer converts segments to packets
+            - data layer converts packets to frames 
+
+# Chpt. 4 TCP/IP Model
