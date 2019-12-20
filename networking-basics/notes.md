@@ -173,3 +173,39 @@
             - data layer converts packets to frames 
 
 # Chpt. 4 TCP/IP Model
+    - The TCP/IP Suite
+        - group of protocols designed to work together to send data over the network
+            - TCP (Transport Control Protocol)
+            - IP (Internet Protocol)
+    
+    - TCP/IP Model
+        - vs. OSI: is reduced version of TCP/IP
+        - 4 Layers
+            - Application
+            - Transport
+            - Internet
+            - Network Interface
+        
+        - Application Layer
+            - defines protocols, services and processes that allow programs and users to interface with the network 
+            - define how programs interface with the transport layer services to use the network 
+            - common protocols
+                - HTTP
+                    - used to transport webpages
+                - telnet
+                    - used to remote access other computers
+                - FTP
+                - TFTP: trivial file transfer protocol
+                - SNMP
+                    - Simple Node Management Protocol
+                - DNS
+                    - takes human-useable URLS and convert to IP addresses
+                - SMTP
+                    - used by email to transfer messages
+        - Transport Layer
+            - provides communication session management between computers
+            - defines level of service and status of connections used when transporting data
+            - common protocols: TCP, UDP (User datagram protocol), RTP (Realtime Protocol)
+        
+        - Internet Layer
+            - responsible for converting data to IP datagram ("packet")
