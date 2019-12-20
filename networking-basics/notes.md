@@ -209,3 +209,14 @@
         
         - Internet Layer
             - responsible for converting data to IP datagram ("packet")
+                - header contains source and destination information
+            - uses header info to move packet across the network
+            - common protocols: IP Protocol, ICMP (internet control message protocol), ARP (Address resolution)
+        - Network Interface/Access Layer
+            - specifies how data physically sent through network
+            - specifies how bits are electronically signalled by hardware 
+            - defines how hardware interaces with network medium
+            - standards defined by network layer:
+                - ethernet
+                - FDDI (fiber optic standard for WAN)
+                - RS232 (defines serial interfaces and comm ports)
