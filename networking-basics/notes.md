@@ -220,3 +220,34 @@
                 - ethernet
                 - FDDI (fiber optic standard for WAN)
                 - RS232 (defines serial interfaces and comm ports)
+
+# Chpt 5 Network Devices
+    - NIC (Network Interface Controller)
+        - allows computer to gain access to hardware of network
+        - needs to match metdia technology
+        - need to match speed used on network, architecture of network
+    - Hubs
+        - mostly falling out of favor in preference to switches
+        - function as bus, 
+    - Bridges
+        - used to break up large network into smaller segments
+        - forerunner to switch
+        - works on layer 2 of OSI
+        - reads frames coming into it, reducing traffic on network through division
+    - switches
+        - used to connect multiple computers together
+            - work primarily on layer 2 of OSI
+        - basic switch: essentially a multiport bridge
+            - can segment a network into `collision domains`
+                - uses ports to set up point-to-point connection between devices connection to affected ports
+            - also used to convert media from one type to another (fiber in to switch, twisted pair going out)
+    - routers
+        - move data around large networks
+            - work on layer 3, 4 of OSI
+        - are programmable
+            - must configure interfaces
+            - have to be told what networks they're connected to
+            - must define what is to be let through routers 
+    - access points
+        - devices allowing computers to gain access to larger network
+        - can be wired or wireless (WAP - wireless access point)
