@@ -54,7 +54,18 @@
         - prevents concurrent threads from executing in parallel
         - one one thread executing at a time
         - CPython requires GIL and is default interpreter
-        - can act as bottleneck to CPU-bound applications
+        - can act as bottleneck to CPU-bound applications 
         - this doesnt mean don't write multi-thread programs
             - for I/O-bound tasks, GIL is not a bottleneck, because they're mostly waiting on external actions like network operations and user input
 
+    - Threading example in folder 02_04
+    
+    - true parallelism requires using python multiprocessing module
+        - for to work, main body of code must be wrapped in __name__ = __main__ statement
+    
+    - OS has scheduler module, which is OS function that assigns processes and threads to run on available CPUs
+        - puts waiting processes in ready queue or I/O queue and assigns them to available CPU
+            - may decide one process has had enough time on CPU and swap it out = `context switch` 
+                - will store state of process or thread to resume later
+                - also must load stored state of process or tread to start
+ 
