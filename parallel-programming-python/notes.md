@@ -25,3 +25,36 @@
             - advantage is scalibilty over shared memory system
 
 # Chpt. 2 Threads and Processes
+    - process: instance of program being executed (code, data, info about its state)
+        - each independent with own address space in memory
+    - threads: subelements within a larger process
+        - basic unit that OS manages
+        - threads can easily share data as part of same process, but sharing data across processes is more difficult
+            - variables and data isolated within processes' address space
+     
+    - sharing data between different processes
+        - requires system-provided: Inter-process communication(IPC) mechanisms
+            - sockets/pipes
+            - shared memory space
+            - remote procedure calls
+        
+        - using multiple threads vs. multiple processes
+            - if application distributed across several computers, will likely need multiprocessing 
+            - if can structure program to take advantage of multiple threads, do so
+                - threads are more `lightweight`, require less overhead
+    
+    - Concurrency vs parallelism
+        - concurrency: ability of program to be broken into parts that can operate independently
+            - in concurrency, indep. processes use same resources, so only one process can occur at a time
+            - useful for I/O dependent tasks 
+        - parallelism: simultaneous execution
+            - useful for computationally-intensive tasks
+    
+    - Global Interpreter Lock
+        - prevents concurrent threads from executing in parallel
+        - one one thread executing at a time
+        - CPython requires GIL and is default interpreter
+        - can act as bottleneck to CPU-bound applications
+        - this doesnt mean don't write multi-thread programs
+            - for I/O-bound tasks, GIL is not a bottleneck, because they're mostly waiting on external actions like network operations and user input
+
