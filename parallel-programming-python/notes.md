@@ -68,4 +68,22 @@
             - may decide one process has had enough time on CPU and swap it out = `context switch` 
                 - will store state of process or thread to resume later
                 - also must load stored state of process or tread to start
- 
+        
+        - scheduling not consistent across runs, or equal, should not be relied on to be so
+    
+    - thread lifecycle
+        - can be in one of four states: new, runnable, blocked (e.g. waiting for input or etc.), terminated
+    
+    - two ways to create thread (see 02_09)
+        - put execution code in function, pass function to thread constructed method with `target` param
+        - define custom subclass that inherits from thread class and overrides its run method
+
+        - calling .join() on the subclass within the manager class needed to prevent the manager/main class from continuing with execution until the subclass is finished.
+        - can use .is_alive() method to return boolean giving active/inactive status of a thread
+
+    - daemon threads (see 02_11)
+        - if a norm child thread is spawned to do sth. like garbage collection, the main program cant end until this child is finished with its job
+        - by making a daemon thread, they can be detached from main thread and put in background.
+            - need to ensure it wont have any negative effects if the daemon thread closes abruptly/ungracefully
+        - make daemon with `[thread varname].daemon = True`
+            - must set this before starting the thread
