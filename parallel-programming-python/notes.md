@@ -87,3 +87,18 @@
             - need to ensure it wont have any negative effects if the daemon thread closes abruptly/ungracefully
         - make daemon with `[thread varname].daemon = True`
             - must set this before starting the thread
+
+# Chpt. 3 Mutual Exclusion
+    - Data Races
+        - problem occurring when two or more threads are concurrently accessing the same location in memory and at least one is writing to that location to modify its value
+    - Mutual Exclusion
+        [varname] = threading.Lock() (with `threading` module imported) used to manually enforce M.E. with locks
+            - then use [varname].acquire() and ...release() to wrap proceduces in code that access memory shared by mutliple threads (see 03_04) 
+                def count_change()
+                    global counter
+                    for i in range(10):
+                        lockvar.acquire()
+                        counter += 1
+                        lockvar.release()
+    
+        
