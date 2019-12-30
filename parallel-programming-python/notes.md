@@ -100,5 +100,27 @@
                         lockvar.acquire()
                         counter += 1
                         lockvar.release()
+    - Mutex: Lock that implements mutual exclusion
+        - limits access to `Critical Section` (part of code accessing a shared resource)
+        - can only be possessed by one thread/process at a time
+        - act of acquiring lock is an `atomic action` ie. executed as single action relative to other threads
+            - cant be interupted by other processes
+        - should keep mutex-protected code sections as short as possible (ie. limited only to actions that actually require access to the shared resource)
     
-        
+    - RLock (re-entrant lock): `[lock varnanme] = threading.RLock()`
+        - if thread tries to lock a mutex that its already locked, will enter into waiting list for that mutex and result in `Deadlock` 
+        - RLock (reentrant mutex) can be locked multiple times by the same thread. 
+            - tracks number of times locked, must be unlocked that many times before processes can continue
+        - common use-case is within a recursive function (function that calls itself), so often also referred to as recursive mutex/lock
+        - example: 04_02
+
+        - regular lock can be released by different thread than the one that acquired it, but RLock cannot
+    
+    - Try Lock  
+        - When multiple threads each have multiple tasks to perform, making those threads block and wait every time they attempt to acquire a lock that's already taken may not be necessary or efficient.
+        - try lock: non-blocking lock/acquire method for mutex
+            - if mutex locked, can continue with other operations while waiting for mutex to be released 
+                - operation: if mutex available, lock it and return TRUE, else return FALSE 
+            
+            - implementation: add the .acquire() method to an IF statement with argument `(blocking=False)`
+                - e.g `if add_list and lockvar.acquire(blocking=False): ## do sth.`
