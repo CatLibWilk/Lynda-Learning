@@ -106,7 +106,9 @@
         - act of acquiring lock is an `atomic action` ie. executed as single action relative to other threads
             - cant be interupted by other processes
         - should keep mutex-protected code sections as short as possible (ie. limited only to actions that actually require access to the shared resource)
-    
+
+# Chpt. 4 Locks
+
     - RLock (re-entrant lock): `[lock varnanme] = threading.RLock()`
         - if thread tries to lock a mutex that its already locked, will enter into waiting list for that mutex and result in `Deadlock` 
         - RLock (reentrant mutex) can be locked multiple times by the same thread. 
@@ -124,3 +126,23 @@
             
             - implementation: add the .acquire() method to an IF statement with argument `(blocking=False)`
                 - e.g `if add_list and lockvar.acquire(blocking=False): ## do sth.`
+    
+    - Read/Write Lock (shared mutex) (see 04_06)
+        - mutex that can be locked in two ways
+            - shared read: multiple threads concurrently
+            - exclusive write: only one thread at a time
+                - when one has EW lock, no other can write *or* read
+        - use when there are many more threads reading shared resource vs. just a few that will write
+        - *not standard in python*
+            - must import a package such as `readerwriterlock`
+                - `from readerwriterlock import rwlock`
+                - replace `lockvar` = threading.Lock() with rwlock.RWLockFair()
+            - RWLock variations
+                - RWLockFair = fair priority for readers/writers
+                - RWLockRead/RWLockWrite = priority for reader or writer 
+            - RWLock has two methods
+                - gen_rlock() and gen_wlock()
+
+# Chpt. 5 Liveness: properties that require a system to make progress
+    - members will have to take turns, but a well-written `lively` program will ensure that all processes will eventually make progress
+    - deadlock: different processes waiting on eachother to take action 
