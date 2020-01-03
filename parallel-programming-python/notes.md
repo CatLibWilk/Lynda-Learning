@@ -146,3 +146,24 @@
 # Chpt. 5 Liveness: properties that require a system to make progress
     - members will have to take turns, but a well-written `lively` program will ensure that all processes will eventually make progress
     - deadlock: different processes waiting on eachother to take action 
+        - most common way to prevent deadlocking is with `lock ordering`: ensuring locks are always taken in the same order by any thread
+        - another technique: `lock timeout`: if cant aqcuire all needed locks, will timeout, release those acquired and wait a random amount of time before trying again
+    
+    - abandoned lock: if critical section code crashes, lock wont be released by thread and other threads will be stuck waiting
+        - avoid by wrapping critical section in `try` block, use `finally` statement to hold the release() method calls
+            - then exception will occur and thread will not fully execute, but program will continue with other threads
+        - ex. some_lock.acquire()
+              try:
+                ## do something
+              finally:
+                some_lock.release()
+        - can also do with `context manager`, ie. using `with` statement in place of try/finally
+            - ex. with some_lock():
+                    ## do something
+    - starvation: when process or thread is perpetually denied access to a needed resource 
+        - can address with priority settings
+    - Livelock (05_08): multiple threads responding to eachother to resolve a conflict, but the result is progress prevention
+        - avoid by ensuring that only one process takes action, determined by priority or another mechanism such as random selection
+        - ex. two locks, with second set `blocking=False` and set to release first lock if second unavailable
+            - result: processes with endlessly pick up and drop the first lock
+        - Livelock difficult to locate to debug, but looking at developer tools CPU usage can help determine if a live- or deadlock
