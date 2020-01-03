@@ -166,4 +166,5 @@
         - avoid by ensuring that only one process takes action, determined by priority or another mechanism such as random selection
         - ex. two locks, with second set `blocking=False` and set to release first lock if second unavailable
             - result: processes with endlessly pick up and drop the first lock
+            - fix: add .sleep() to the IF statement that drops to the first lock so process waits a little before trying again. 
         - Livelock difficult to locate to debug, but looking at developer tools CPU usage can help determine if a live- or deadlock
