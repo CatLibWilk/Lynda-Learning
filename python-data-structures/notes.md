@@ -28,3 +28,23 @@
             else 
                 return None
         - is_empty method: return stack.items == [] (return True if stack is equal to empty list, else false)
+
+# Chpt 3 Queue Data Structure
+    - hold collection of items in order in which added (FIFO - first in first out)
+        - right side ("front") of a python list is "front" of list, items taken from front in constant time, added to "back" of list (ie. at 0 index) in linear time, because each addition changes the indexes for each item 
+        - queue is `limited access` because can only access data from one place
+        - useful when need to access data in order that it became available
+        - also `recursive`: queue is either empty or consists of first item and rest of queue
+    
+    - queue class will have enqueue, dequeue, peek, size, and is_empty methods
+
+    - enqueue
+        - rather than `append` as with stack, will use `insert`
+            ie. def enqueue(self, item):
+                    self.items.insert(0, item)
+    - dequeue
+        - uses .pop() (removes last item in list)
+            - requires check to see if list is populated before trying to pop (or will error)
+    
+    - peek: return self.items[-1] (will of course need check make sure list is not empty)
+    
