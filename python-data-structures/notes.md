@@ -47,4 +47,29 @@
             - requires check to see if list is populated before trying to pop (or will error)
     
     - peek: return self.items[-1] (will of course need check make sure list is not empty)
-    
+
+# Chpt 4 Deque ("DECK")
+    - `double-ended queue`
+    - abstract datatype resembling both a stack and queue
+    - items can be added and removed both from front and back
+    - will also use python list to implement deque
+    - uses FIFO and/or LIFO (last in first out) models at same time
+    - can choose which end of list is 'front' because will use linear runtime regardless of which end accessing data
+    - used in common interview question: check if word is a palindrome
+    - methods
+        - because remove from front and end, method names need to distinguish between add/remove from front and from back
+        - add/remove_front, add/remove_rear, peek_front/rear, size
+        - add_front/rear
+            - front `self.items.insert(0, item)`
+            - rear `self.items.append(item)`
+        -remove_front/rear
+            - front `self.items.pop(0)` //pop item from 0th index
+            - rear `self.items.pop()`
+            - !needs check for non-empty list
+                - if self.items:
+                    return self.items.pop()
+                  return None
+
+# Chpt Next Steps/External Resources
+    - Problem Solving with Algorithms and Data Structures using Python
+        - `https://runestone.academy/runestone/books/published/pythonds/index.html`
