@@ -39,3 +39,21 @@
             - May not write any production code until a failing unit test is written
             - May not write more of a unit test than is sufficient to fail, and not compiling is failing
             - May not write more production code than is sufficient to pass the currently failing unit test
+
+    - Fizzbuzz kata
+        - refactor step means also eliminating duplicated test calls to a function, so should remove or rewrite to generalize
+            - ex. replace with general utility function s.a.
+                //with a fizzbuzz function defined above
+                def checkFizz(value, expectedRetVal):
+                    retval = fizzbuzz(value)
+                    assert reval == expectedRetVal
+
+## Chpt. 2 - Python Virtual Environments
+    - by default all python packages are installed to single directory on host system
+        - this is a problem when different projects require different versions of a package
+        - virtual environments solve by creating isolated python envs customizable for each project
+    - venvs are directories containing links to systems python install and additional subdirectories for installing particular python packages in that particular venv
+    - when a venv is activated, the PATH var is updated to point to the venv
+    - Python2 requires pip install virtualenv, python3 has built-in module = `venv` 
+
+## Chpt. 3 - PyTest
