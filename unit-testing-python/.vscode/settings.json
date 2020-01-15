@@ -1,0 +1,9 @@
+{
+    "python.pythonPath": "tester/bin/python3.7",
+    "python.testing.pytestArgs": [
+        "tester"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.nosetestsEnabled": false,
+    "python.testing.pytestEnabled": true
+}

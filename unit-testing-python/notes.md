@@ -57,3 +57,16 @@
     - Python2 requires pip install virtualenv, python3 has built-in module = `venv` 
 
 ## Chpt. 3 - PyTest
+    - python unit testing framework
+        - allows for testing of modules, classes, fixtures
+        - uses built-in `assert` statement
+        - adds CL arguments to specify order of test run
+    - setup
+        - mkdir a test directory
+        - `virtualenv [thatdirectory]`
+        - check if pytest installed `pytest --version`
+        - make a test, run as `pytest my_test.py`
+        
+    - how to build unit test
+        - tests are functions with `test` in beginning of name
+        - test runs and verifies values based on `assert` statement
