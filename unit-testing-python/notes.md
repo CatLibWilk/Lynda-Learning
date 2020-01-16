@@ -70,3 +70,43 @@
     - how to build unit test
         - tests are functions with `test` in beginning of name
         - test runs and verifies values based on `assert` statement
+
+    - XUnit Style Setup and Teardown
+        - pytest supports xunit style functionality allowing user to execute code before and after test modules, functions, classes and methods
+            - explanation from S.O.:
+                For example you have a test that requires items to exist, or certain state - so you put these actions(creating object instances, initializing db, preparing rules and so on) into the setUp.
+
+                Also as you know each test should stop in the place where it was started - this means that we have to restore app state to it's initial state - e.g close files, connections, removing newly created items, calling transactions callback and so on - all these steps are to be included into the tearDown.
+
+                So the idea is that test itself should contain only actions that to be performed on the test object to get the result, while setUp and tearDown are the methods to help you to leave your test code clean and flexible.
+
+                You can create a setUp and tearDown for a bunch of tests and define them in a parent class - so it would be easy for you to support such tests and update common preparations and clean ups.
+
+                If you are looking for an easy example please use the following link with example.
+    
+    - Test Fixtures
+        - allow for reuse of code across tests by specifying functions that should be executed before test runs
+        - pytest.fixture decorator applied to functions to specify as fixture
+        - adding fixture test to parameter list of function (ie. adding as argument) will specify that the test uses the fixture
+            - or using @pytest.mark.usefixture("fixturename") decorator before test
+            - or setting fixture `autouse` attribute to true will make all tests within fixture scope execute fixture before running 
+                - `@pytest.fixture(autouse=True)`
+        - each fixture can specify teardown that is called after fixture goes out of scope
+            - specify with `yield` in fixture code or with `addFinalizer`
+                - addFinalizer ex. @pytest.fixture()
+                      def setup(request):
+                        //do sth
+                        def teardown():
+                            //teardown
+                        request.addFinalizer(teardown)
+                    - using addFinalizer allows for multiple teardown functions to be specified (ie. with multiple `request.addFinalizer() calls)
+            - fixture scopes:
+                - function: run fixture once for each test
+                - class: run once for each class
+                - module: run once when module goes in-scope
+                - session: run when pytest starts
+            - fixtures can also optionally return data to be used in the test
+                - given in `params` argument in fixture decorator
+                    - @pytest.fixture(params=[1, 2, 3])
+                      def test(request):
+                        return request.params  
