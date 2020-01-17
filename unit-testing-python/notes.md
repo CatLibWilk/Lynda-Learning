@@ -109,4 +109,26 @@
                 - given in `params` argument in fixture decorator
                     - @pytest.fixture(params=[1, 2, 3])
                       def test(request):
-                        return request.params  
+                        return request.params
+            
+            - assert statements and exception testing
+                - assert statements perform validations in test
+                    - pytest expands messages returned from assert failures to provide more context
+                    - can use `approx` function to validate floating point values that may other wise fail arbitrarily
+                        - ex. assert val == approx(0.3)
+                - exception verification
+                    - pytest uses `with raises(valueError)` to test that a function correctly throws error under certain conditions
+                        - if specified error not thrown in the block after the `raises` statement, the test fails
+            
+            - Pytest CL arguments
+                - can specify module name to run only tests in that module (eg. `pytest test_file1.py`)
+                - `-k "expression"` runs tests that match evaluatable expression in the string (eg. module/class/function names)
+                    - eg. `pytest -k "functionName"`
+                - `-m "expression"` runs tests with `pytest.mark` decorator matching the expression
+                - `-v` verbose output
+                - `q` 'quiet' ie. minimal output
+                - `s` dont capture console output
+                - `--ignore` specifiy path to ignore for test discovery
+                - `--maxfail` stop after number of test failures  
+
+## Chpt. 5 Unit Test Isolation
