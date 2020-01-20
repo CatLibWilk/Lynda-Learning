@@ -132,3 +132,19 @@
                 - `--maxfail` stop after number of test failures  
 
 ## Chpt. 5 Unit Test Isolation
+    - often need to query external services or other parts of a system that if included in tests might run slowly, or are difficult to replicate in test environment
+    - `test doubles`: objects used in unit tests as replacements for real production system collaborators
+        - types
+            - dummy: object that can be passed around but dont have any type of test implementation
+            - fake: simplified functional implementation of an interface suitable for testing but not production
+            - stub: objects providing implementations with canned answers suitable for testing
+            - spy: object providing implementations that record values passed in so they can be used by the test
+            - mock: objects preprogrammed to expect specific calls and params and can throw exceptions when neccessary. 
+        
+        - unittest.mock is is a python mocking framework
+            - built-in python 3.3 and later
+            - older versions req `pip install mock`
+            - has `Mock` class used to create doubles
+                - provides many initialization params (entered as args) which are used to control mock object behavior
+                - has many built-in functions for verifying how the object was used
+                    - use `assert_` attributes
