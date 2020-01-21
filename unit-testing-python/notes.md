@@ -148,3 +148,24 @@
                 - provides many initialization params (entered as args) which are used to control mock object behavior
                 - has many built-in functions for verifying how the object was used
                     - use `assert_` attributes
+                        - eg.
+                            - `assert_called`: assert that the mock was called
+            - `MagicMock` class derived from Mock and provides and provides a default implementation for many of the `magic` methods defined for object in python by default 
+                - ie. methods beginning with two `_` such as `__str__`
+    
+    - TDD Best Practices
+        - always do the next simplest test case
+            - keeps code clean and coherent
+            - gradually increases the complexity of code
+        - use descriptive test names
+        - keep test loop fast
+            - unit test execution shouldn't take more than a few seconds at most
+            - should eliminate console output
+        - use code coverage tools
+            - once all your test cases are covered, run through code coverage tool
+                - may reveal scenarios that you missed (eg. negative test cases)
+        - run tests multiple times and in random order
+            - `pytest-random-order` plugin will run tests in random order
+        - use static code analysis tool
+            - pylint and similar can find errors in code, check that code meets a coding standard (eg. PEP8)
+            - pylint detects duplicate code and generates UML diagrams of code
