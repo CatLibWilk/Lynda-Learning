@@ -20,3 +20,30 @@ Bash (Bourne again Shell)
         - `1>`: standard output `>2` standard error
         - `&>` redirects both stout and error to same place
         - e.g. `cp -v * ../newfolder 1>../success.txt 2>error.txt`: copy all files in current dir into new folder, where successful (-v means verbose printout of execution of cp), write message to success file, where error, write to error file
+
+- grep, awk, cut
+    grep: search to things in files
+        - basic syntax: `grep [searchterm] [filename]` => `grep andy names.txt`
+        - enable color highlighting for terms: ` export GREP_OPTIONS='--color=auto' `
+        - `-i` option in command makes case-insensitive
+        - can grep the output of commands as well
+            - eg. ` ping example.com | grep 'bytes from' `
+    awk: scans files for lines that match any of a set of patterns specified 
+        - eg: `grep -i break-in auth.log | awk {'print $12'}` = grep file for `break-in`, pipe the results to awk, awk prints the twelveth "column" of the line in a space delimited sense, here returning the IP addresses from the log file that appear to be break-in attempts
+
+    cut: can cut out portions of lines in a file/output of a command
+        - eg. ` ping example.com -c 1 | grep 'bytes from' | cut -d = -f 4 ` : ping example.com (`-c 1` means only do it once rather than until the command is stopped), grep lines with 'bytes from' in the line, the use cut to only return the 4th thing delimited (-d) by `=` , in the example, the time for ping to complete
+
+- bash script syntax
+    - script starts with interpreter directive (hashbang, shebang)
+    - followed by path to bash executable
+    - generally: `#!bin/bash`
+    
+    - template:
+        #!bin/bash
+        #comment
+        commands
+- running bash scripts
+    - in command line: `bash my.sh` 
+    - or, make script executable with `chmod +x ./[filename]` and can run directly by typing filename in CL
+        - need `./` because current working directory isn't part of "path executable variable", but if put somewhere like `usr/bin` the could run directly (not good in practice though)
