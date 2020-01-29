@@ -47,3 +47,54 @@ Bash (Bourne again Shell)
     - in command line: `bash my.sh` 
     - or, make script executable with `chmod +x ./[filename]` and can run directly by typing filename in CL
         - need `./` because current working directory isn't part of "path executable variable", but if put somewhere like `usr/bin` the could run directly (not good in practice though)
+
+## Chpt. 2 Building Bash Script
+- echo
+    - `echo`: displays text
+    - syntax = `echo [statement]`
+    - no quotes, single, double quotes cause different conditions
+        - no quotes: need to escape special characters
+        - single: nothing in quotes is interpreted, so printed as written, ie. ignores variables (e.g. `$variable`) 
+        - double: allows for variables (which can be escaped with backslash if necessary)
+    - echo without a statement prints  empty line
+
+- variables
+    - var=[value]
+    - no spaces, if value needs a space, put in quotes
+    - called with `$var`
+    - adding attributes to variable
+        - `declare` before variable and use `-[attr]`
+            - eg. declare -i a=123 : "a is an integer"
+        - `-i`: is integer
+        - `r`: is read-only
+        - `l`: converts value to lowercase
+        - `u`: converts value to uppercase 
+    - built-in vars
+        - `$PWD`: returns working directory
+        - `$MACHTYPE`: returns machine type
+        - `$HOSTNAME`: returns system name
+        - `$ BASH_VERSION`
+        - `$SECONDS`: returns how long script has been running
+    - command substitution
+        - get information back from a command in-script, rather than just running it
+        - syntax: [varname]=$([cmd]) e.g. `d=$(pwd)`
+    - arithmatic expressions
+        - math wrapped in double parenthesis e.g. `$d=((2+2))`
+        - bash math only works with integers
+            - if need floating-point, need to use `bc` program to process
+                - e.g. `g=$(echo 1/3 | bc -l)` returns .33333
+    - comparing values
+        - double squared brackets, with spaces between the inner brackets and values
+            - eg. `[[ "cat" == "cat ]]` returns `0`
+        - returns boolean, 0=true, 1=false
+        - get value with `$?` in script
+        - to compare numbers use operators to tell bash they are numbers
+            - `-lt`: less than, `-gt`: greater than, `-le`: less than equal to, `-ge`: greater than equal to, `-eq`: equal, `-ne`: not equal
+            - eg. `[[ 20 -lt 100 ]]`, `echo $?` returns `0` for true
+        - logical operators
+            - `&&`: AND
+            - ` | `: OR
+            - `!`: NOT
+
+        - checking nullity
+            - `-z` is null, `-n` not null
