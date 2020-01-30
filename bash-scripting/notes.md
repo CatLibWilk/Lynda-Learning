@@ -98,3 +98,21 @@ Bash (Bourne again Shell)
 
         - checking nullity
             - `-z` is null, `-n` not null
+
+- string manipulation
+    - for a='hello', b="world":
+        - concatenation: variables next to each other, eg. `$a$b` = 'helloworld'
+        - substring: brackets with index, eg. `${a:1}` = 'ello'
+            - ask for number of chars after index: `$a{a:1:2}` = 'el'
+        - replace text in string:
+            - `${[varname]/[what-to-replace]/[what-to-replace-first-instance-with]}`
+                - eg. text='one two three', `echo ${text/two/chew}` returns 'one chew three'
+            - double-slash before search term replaces all the instances
+            - `#` before search term will replace only if is the beginning of the string
+            - `%` replaces only if at end of string
+- coloring/styling
+    - ANSI escape sequences
+        - use `echo -e` to enable escaping
+        - eg. `echo -e '\033[34;42mColor Text\033[0m'` to coloring output 'Color Text'
+        - to reduce typing and typos, can save the escape seqs as variables and use string concatenation where needed
+    - can also use `tput` (see `man terminfo` for operations and attributes)
