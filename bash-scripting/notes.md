@@ -116,3 +116,42 @@ Bash (Bourne again Shell)
         - eg. `echo -e '\033[34;42mColor Text\033[0m'` to coloring output 'Color Text'
         - to reduce typing and typos, can save the escape seqs as variables and use string concatenation where needed
     - can also use `tput` (see `man terminfo` for operations and attributes)
+
+- date and printf
+    - can use `date` command and specificers s.a. `%d-%m-%Y` to print dates
+    - printf: print out data with particular format
+        - eg. `printf "Name:\t%s\nID:\t%04d\n" "Andy" "02"` prints the two inputs with their labels in two lines, with the ID padded out to 4 digits
+            - %s specifies that a string will be used, %d that a digit will be specified
+    
+    using variable `-v`, eg `printf -v d "[some text and shit]"` assigns result of printf to a variable, here "d"
+
+- Working with arrays
+    - declare as array by enclosing in parens
+    - NO COMMAS between elements in array
+    - retrieve with 0-based index
+        - echo $var will return only the first element, to get all `echo ${var[@]}`
+            - to get last or from end, `echo ${var[@]: -[index_from_end]}`
+        - eg. for var a: `echo ${a[0]}` - need curlys because otherwise will just concat the value of array with `[0]` in literal string sense at end.
+    - can set array element by index
+        - dont have to populate every element, but if want to add to end, use `+=` operator, eg. `var+=("new element")` 
+
+- Reading/Writing Text files
+    - Writing uses `greater than` symbol
+        - `"text" > text.txt` => writes string "text" to the file, overwriting anything currently in file
+        - `> text.txt` clears content of file
+        - `"text >> text.txt` => writes string "text" to end of file.
+    - Writing
+        - uses while loop, read command, and "less than" symbol
+        - eg. 
+            while read f; do  
+                    echo $f  
+            done < file.txt  
+            - reads contents of "file.txt" into a named var f, echoes each line
+    
+    - `Here` documents
+        - here docs let you specify input freely, up to a given limit string
+        - syntax: two less thans and a limit string, eg. `<< LimitString`
+            - put the limit string in a part of the file, then running this command will echo out the lines of text up to (not including) that limit sting
+        - `<<- LimitString`, ie. with the `-`, strips out leading tabs
+
+## Chpt 3: Control Structures
