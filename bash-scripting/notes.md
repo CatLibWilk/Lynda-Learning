@@ -155,3 +155,107 @@ Bash (Bourne again Shell)
         - `<<- LimitString`, ie. with the `-`, strips out leading tabs
 
 ## Chpt 3: Control Structures
+- if statements
+        - if [statement] "test brackets"  
+        - if [[statement]] "extended brackets"  
+        - if ((statement)) "integer comparision"  
+        - can also have no brackets
+        - syntax:  
+        if [statement]  
+        then  
+            *do something*  
+        elif [second statement]; then  
+            *do sth else  
+        fi
+- while and until loops
+    - syntax:  
+    while/until [[statement]]; do  
+        *do sth.  
+    done 
+    
+- for loop
+    - syntax:  
+    for i in 1 2 3  
+    do  
+        *do sth*  
+    done
+    - with a defined array:   
+    arr =("one", "two", "three")   
+    for i in ${arr[@]}   
+    do   
+        *dosth*   
+    done  
+    
+- selecting behavior with case statement
+    - case checks a value against a series of provided values
+    - syntax: 
+    with a var $a equal to "dog:  
+    case $a in   
+            cat) echo "is cat";;    //check if $a=="cat", if so echo   
+            dog | puppy) echo "is dog";;    //additionally, check if $a == "dog" or "puppy" and echo if so   
+            *) ehco "no match";;  //echo no match if meets no conditions   
+    esac  
+
+- functions
+    - syntax:  
+    function functionName {  
+        *dosth*  
+    }  
+    - call function simply with name
+    - can pass in args, referred to as $1, $2, $3, etc. in function
+        - eg.  
+        function greet {  
+            echo "hi $1"
+        }  
+        greet andy   //function all with 'andy' as arg
+    - pass list of arguments into function
+        - eg  
+        function numberthings {  
+            i=1
+            for f in $@; do  //`$@` represents all the elements of the list of arguments  
+            echo $i: $f  //echo the current val i and the current element in loop of passed in list of args  
+            ((i+=1))  
+            done  
+        }  
+        numberthings $(ls)  //run functions with the output of the `ls` command  
+
+## Chpt. 4 - Interacting with user
+- working with arguments
+    - `$@` = a list of arguments passed in. Can then be used in for loop
+    - `$#` returns the number of arguments 
+
+- working with flags
+    - flags are the things like `-a` etc. that follow a command eg. `ls -a`
+    - can use   `getops` function builtin to access these in a script
+    - eg  
+        while getops :u:p:ab option; do  //look for values of -u and -p flags in call, also see if flags a and b were in call, with or without a value. `:` at                                         //beginning means get info about flags used but not specified below.  
+            case $option in  
+                u) user=$OPTARG;;  //set user to value of -u  
+                p) pass=$OPTARG;;  
+                a) echo "got the a flag";;  
+                b) echo "got the b flag";;  
+                ?) echo "$OPTARG also used";;  //corresponds to the `:` included in beginning of `while getops...`
+            esac        
+        done  
+        echo "user: $user / pass: $pass"  
+
+- getting input during executions
+    - `read` keyword pauses script for input then stores input in variable specified
+    - eg  
+    echo "what is your name?"  
+    read name //pauses script, stores input in `name` variable   
+    echo $name 
+        - can also use `-p` flag in `read` to create prompt inline (no echo above)
+    - can make menu of choices with `select`
+        - eg.  
+        select animal in "dog" "cat"  
+        do  
+            echo "you selected $animal"  
+            break  
+        done  
+- ensuring a response
+    - case 1: command requires a certain number of args
+        - use sth. like `[ $# -lt 3]; then   //ie. if there are less than three args, return or do somthing specified below
+    - case 2: user not allowed to continue without specifying some choice as input
+        - use `z`: `while [[ -z $a ]]; do`  //if variable defined in a `read` ($a) is not given, throw error defined below
+            - can also define default input in the while loop, so if user just presses `enter`, the script will set the var itself
