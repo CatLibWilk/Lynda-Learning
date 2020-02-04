@@ -1,1 +1,25 @@
 ## Chpt.1 Configuring Network Settings
+- 2 ways to configure
+    - Physical changes to config files at `/etc/network/interfaces` (interfaces is file not dir)
+    - with `NetworkManager` 
+        - use NM to create connections: groups of config settings for a device
+        - uses `nmcli` command, which requires `apt install network-manager` (at least for the U16 I have on D.O.)
+            - if need to install, need to `service NetworkManager start` as well
+- when configuring networks, can make static or dynamic
+    - dynamic: IP assigned by DHCP (Dynamic Host Configuration Protocol)
+    - static: unchanging address set by admin
+    - clients usually use dynamic (with NetworkManager), servers static
+- finding connection information
+    - use `ip` command
+    - `ip a`:
+        - results named by `Predictable Network Interface Names` protocol
+            - eno[number] eg. `eno1`: network device is "onboard" ie. built into mainboard
+            - en[numbers_and_letters] eg. `enp0s1`: device is on different card or presented to system as such
+                 - number refers to location on bus, eg for above, "slot 3 on PCI bus 0"
+            - wl[numletter]: WLAN/Wifi
+            - enx[number]: MAC address
+        - following name is block of allcaps info eg `<BROADCAST,MULTICAST,UP,LOWER_UP>`
+            - `UP` means interface is up, `LOWER_UP` underlying network is connect physically
+            - `STATE [UP/DOWN]` a little further down the line indicates general status of connection
+        - `ip -4 a` returns device info shortened to just the ipv4 address
+        - `ip route` shows routes
