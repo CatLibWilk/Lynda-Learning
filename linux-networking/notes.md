@@ -5,6 +5,7 @@
         - use NM to create connections: groups of config settings for a device
         - uses `nmcli` command, which requires `apt install network-manager` (at least for the U16 I have on D.O.)
             - if need to install, need to `service NetworkManager start` as well
+            - (working on D.O. droplet) = change `managed=false` to true in /etc/NetworkManager/NetworkManager.conf for devices to appear managed in output of `nmcli d`
 - when configuring networks, can make static or dynamic
     - dynamic: IP assigned by DHCP (Dynamic Host Configuration Protocol)
     - static: unchanging address set by admin
@@ -23,3 +24,8 @@
             - `STATE [UP/DOWN]` a little further down the line indicates general status of connection
         - `ip -4 a` returns device info shortened to just the ipv4 address
         - `ip route` shows routes
+
+- Dynamic Address configuration with NetworkManager
+    - check managed devices: `nmcli d`
+    - edit/create a connection: `nmcli c e [cname]` (without name, editor will create new connection)
+    - delete a connection: `nmcli c delete [connection_name_in_double_quotes]`
