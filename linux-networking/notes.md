@@ -29,3 +29,10 @@
     - check managed devices: `nmcli d`
     - edit/create a connection: `nmcli c e [cname]` (without name, editor will create new connection)
     - delete a connection: `nmcli c delete [connection_name_in_double_quotes]`
+    - creating a connection using DHCP
+        - after cmd `nmcli c e [cname]`:
+            - ipv4.method needs to be set to auto
+            - add connection to device: `set connection.interface-name [adapter name]`
+            - write cmd `save` 
+
+- Dynamic Address configuration
