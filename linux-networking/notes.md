@@ -35,4 +35,31 @@
             - add connection to device: `set connection.interface-name [adapter name]`
             - write cmd `save` 
 
-- Dynamic Address configuration
+- Static Address configuration
+    - create net connection `nmcli c e`:
+        - set type of connection
+        - `set connection.id [name]`
+        - `set connection.interface-name [adapter_name]`
+        - change ipv4 settings:
+            - `method` from auto to manual
+            - set `ipv4.addresses` to new address
+            - set `ipv4.gateway`
+            - set `ipv4.dns` ex. google's `8.8.8.8`
+
+- Configuring dynamic address manually (no NetworkManager)
+    - open `/etc/network/interfaces`
+    - add "stanza", definition of interfaces
+        - ex:  
+        auto enp0s3  
+        iface enp0s3 inet dhcp  
+          
+        static:  
+        auto enp0s3  
+        iface enp0s3 inet dhcp  
+        address 10.0.2.24/10  
+        gateway 10.0.2.1  
+    - `restart NetworkManager service` to prevent Manager from managing this device
+    - `restart networking service`
+    - `reboot` 
+
+## Chpt. 2 Firewall and Routing
