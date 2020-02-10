@@ -63,3 +63,14 @@
     - `reboot` 
 
 ## Chpt. 2 Firewall and Routing
+- ufw
+    - firewall management in ubuntu through uwf (uncomplicated firewall)
+        - rules
+        - `ufw enable` starts firewall
+        -  `ufw status verbose` to show current status of firewall
+        - `ufw reject [port]` will reject connections to a given port
+        - `ufw allow [port]` to allow on a port
+        - `ufw delete [rule_name]` will delete a rule that's been added to the ufw table 
+            - eg. `ufw delete allow 3000` will delete the `allow 3000` rule
+        - `ufw allow proto tcp from [remote_ip_addr] to [local_ip_addr] port [portnumber]`
+    - ufw has default rules at `/etc/ufw`
