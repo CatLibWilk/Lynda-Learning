@@ -74,3 +74,11 @@
             - eg. `ufw delete allow 3000` will delete the `allow 3000` rule
         - `ufw allow proto tcp from [remote_ip_addr] to [local_ip_addr] port [portnumber]`
     - ufw has default rules at `/etc/ufw`
+- packet forwarding
+    - `gateway device` acts as intermediary for sending data between devices in-network and outside.
+    - routing vs. forwarding
+        - routing defines where packets intended for another network are sent
+        - forwarding moves packets from one network interface to another (in same network)
+    - linux machines can be configured to perform routing/forwarding tasks by enabling `ipv4_forwarding`
+        - `sudo sysctl -w net.ipv4.ip_forward=1` to enable temporarily
+        - uncommenting in the `/etc/sysctl.conf `file to permanently enable
