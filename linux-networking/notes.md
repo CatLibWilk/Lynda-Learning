@@ -82,3 +82,18 @@
     - linux machines can be configured to perform routing/forwarding tasks by enabling `ipv4_forwarding`
         - `sudo sysctl -w net.ipv4.ip_forward=1` to enable temporarily
         - uncommenting in the `/etc/sysctl.conf `file to permanently enable
+- Addresses on Private Networks
+    - 10.0.0/8, 72.16.0.0/12 and 192.168.0.0/16 ranges are reserved for devices on private networks
+    - for information on private networks to get to the internet, networks use NAT (network address translation) to convert packet addresses between networks
+    - NAT
+        - converts packet addresses for different networks
+        - firewall configured to use `masquerading`: to outside network, packets appear to come from router 
+    - Setup
+        - change firewalls default forwarding behavior at `/etc/default/ufw`: `DEFAULT_FORWARD_POLICY` from DROP to ACCEPT
+        - to `/etc/ufw/before.rules` add:
+            - *nat  
+            :POSTROUTING ACCEPT [0:0]  
+            -A POSTROUTING -s [PRIV_NET_IP] -O [DEVICE] -j MASQUERADE //eg. -A POSTROUTING -s 10.0.2.0/24 -o enp0s8 -j MASQUERADE  
+            COMMIT  
+            
+        
