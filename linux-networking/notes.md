@@ -96,4 +96,45 @@
             -A POSTROUTING -s [PRIV_NET_IP] -O [DEVICE] -j MASQUERADE //eg. -A POSTROUTING -s 10.0.2.0/24 -o enp0s8 -j MASQUERADE  
             COMMIT  
             
-        
+- Routing Traffic
+    - `ip route` command shows route info
+        - eg. from DO Droplet:  
+            default via 159.89.32.1 dev eth0 onlink  
+            10.17.0.0/16 dev eth0  proto kernel  scope link  src 10.17.0.5  
+            159.89.32.0/20 dev eth0  proto kernel  scope link  src 159.89.41.131  
+        - default is the default route, line tells system to send traffic through the address using the `eth0` devive
+    - create route (temporarily): ip route add [destination_address] via [route_address]
+        - eg. `ip route add 10.0.3.0/24 via 10.0.2.6`
+    - create route (permanent): add to `/etc/network/interfaces` for rule when the device comes up, like  
+        - auto enp0s3...  
+            up route add 10.0.3.0/24 via 10.0.2.6
+    - create with NetworkManager
+        - `nmcli connection modify [connection_name]`  
+           `ipv4.routes "[destination_addr] [route_addr]`
+    
+    - dynamic routing
+        - used on very large network where manual route changes are impractical
+- Network Tunnels
+    - est. connection between two devices through which traffic can be sent
+    - three types: `IP-IP `(for ipv4 traffic), `SIT` (ipv6 traffic over ipv4 network), `GRE` (several traffic types over ipv4)
+    - to set up, need:
+        - both devices' IP address
+        - create network device and assign an IP at each end
+    - creating GRE tunnel in CLI
+        - on router 1: `ip tunnel add [name] mode gre`, and give remote and local IP addresses
+            - `ip link set [tunnel_name] up`
+            - `ip address add [IP_address] dev [tunnel_name] to add address to newly reacted device
+        - on router 2: do similar but reflecting locality of second router/network
+    - creating GRE in `/etc/network/interfaces`
+        - on both machines:
+            - define interface  
+                auto [tunnel_name]  
+                iface [tunnel_name] inet static  
+        - on router 1:
+            - give address, add netmask, tell system to create tunnel at startup  
+            address 10.1.0.1  
+            netmask 255.255.255.0  
+            pre-up ip tunnel add [tunnel_name] mode gre \  
+            remote [IP] local [IP] ttl 255  
+            post-down ip tunnel del[tunnel_name]
+        - on router 2: same, but reflecting locality        
