@@ -138,3 +138,13 @@
             remote [IP] local [IP] ttl 255  
             post-down ip tunnel del[tunnel_name]
         - on router 2: same, but reflecting locality        
+
+- Time Syncronization
+    - systems typically get their time informatino from a time server on the internet using NTP (Network Time Protocol).
+    - can set up time server on own network with `chrony` (`apt install chrony`)
+        - cli command `chronyc`
+
+- Monitoring Network Performance
+    - `iftops` shows traffic per hose
+    - `ifhogs` shows traffic per process
+    
