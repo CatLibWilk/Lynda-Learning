@@ -7,3 +7,26 @@
         - main config = `apache2.conf`
         - individual site configs = `sites-available` folder
             -  use `a2ensite` and `a2dissite` to enable/disable sites
+- Apache Directives
+    - used in .conf file to determine how the server or hosts function
+    - common sections
+        - <VirtualHost> = defines a virtualhost
+        - <IfModule> = tests for presence of module
+        - <FilesMatch> = tells system to reach in certain way in response to requests for files matching a certain regex or condition
+            - often used as handler for a particular type of file
+        - <Directory> = sets parameters for given directory on server
+            - inside will frequently include directives like Options, AllowOverride, Require, etc.
+    - common directives
+        - `Options`: sets parameter that a directory will be allowed to support 
+        - `AllowOverride`: set features that can be overridden by later configurations like htaccess
+        - `Require`: allow views to access/not access a given folder
+        - `Include`: loads another file
+        - `DocumentRoot`: root folder that apache will serve up
+    - Name-based VirtualHosts
+        - allows several websites to have the same IP address
+        - setup:
+            - at `etc/apache2/sites-available`, copy `000-default.conf and rename for your site
+            - set `ServerName` to match the domain that will point to the IP address
+            - set `DocumentRoot` for directory that apache should serve
+            - run cmd `a2ensite [conf_file_name]` and `service apache2 reload`
+## Chpt. 2 Adding Encryption
