@@ -29,4 +29,24 @@
             - set `ServerName` to match the domain that will point to the IP address
             - set `DocumentRoot` for directory that apache should serve
             - run cmd `a2ensite [conf_file_name]` and `service apache2 reload`
-## Chpt. 2 Adding Encryption
+## Chpt. 2 Adding Encryption with HTTPS
+- HTTPS uses TLS (Transport Layer Security to encrypt communication between client and server)
+    - require certificate
+        - carry information about server and what organization has "signed" it, ie.  what entity has "vouched" for it.
+    - configuration
+        - `/etc/apache2/sites-available/default-ssl.conf` is template VirtualHost for setting up ssl
+            - need to set `ServerName` as directory (will add)
+            - `SSLEngine` must be set to `on`
+            - set paths for certificate and private key with `SSLCertificateFile` and `SSLCertificateKeyFile`
+- creating a self-signed certicate (cert that doesnt provide a trust relationship)
+    - self-signed certs provide encryption but dont verify identity.
+    - DO NOT USE IN PRODUCTION
+    - generation command:
+        - openssl req -x509  
+        -newkey rsa:2048  
+        -keyout mycert.key  
+        -out mycert.pem  
+        -node  #no DES: no password  
+        -days 365  
+    - key (file.key) will go somewhere like `/etc/ssl/private`, cert (file.pem) `/etc/ssl/certs`
+    - run `a2enmod` and `a2ensite` for the ssl module
