@@ -50,3 +50,20 @@
         -days 365  
     - key (file.key) will go somewhere like `/etc/ssl/private`, cert (file.pem) `/etc/ssl/certs`
     - run `a2enmod` and `a2ensite` for the ssl module
+- using a cert from a cert authority
+    - name on cert must match domain name
+        - can get separate ones for each domain and subdomain, a SAN cert that covers a list of subdomains, or a `wildcard` cert that covers all subdomains of a domain
+- making access easier
+    - typed addresses need to be handled, by default https://website.com, http://website.com, http://www.website.com, and https://www.website.com are 4 different sites, only the first two will work by default
+
+    - handling `www`
+        - need server alias, so that regardless of `www` inclusion the server handles correctly
+        - at `/etc/apache2/sites-available/default-ssl.conf` (or non-ssl if thats whats used):
+            - add `ServerAlias` in Vhost block, eg. `ServerAlias www.mywebsite.com`
+        - redirect HTTP to HTTPS
+            - open conf for non-secure vhost `/etc/apache2/sites-available/000-default.conf`
+            -  in addition to `ServerName` and `ServerAlias`, add `Redirect` to vhost block
+                - eg. `Redirect permanent / https://www.mywebsite.com`
+    - DNS support for WWW
+        - need to create DNS record of type `CNAME` with your domain provider
+## Chpt. 3 Administering Apache Server
