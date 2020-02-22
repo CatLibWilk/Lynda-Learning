@@ -67,3 +67,25 @@
     - DNS support for WWW
         - need to create DNS record of type `CNAME` with your domain provider
 ## Chpt. 3 Administering Apache Server
+- Apache Logging
+    - logs usually at `var/log/apache/[access or error].log`
+    - in access log, first position in line gives IP address of requesting machine
+- Using Modules
+    - see Modules available with `apache2ctl -M` 
+    - find modules with `apt search libapache2-mod*`
+    - enable: `a2enmod [modname]`
+- user-based security
+    - open site conf, eg `/etc/apache2/sites-available/000-default.conf`
+    - add `<Directory [path]>` block to directory you want to protect
+        - eg. `<Directory /var/html/www/protected>`
+    - to DirBlock, add:
+        AuthType Basic  
+        AuthName "Please log in"  
+        AuthUserFile /usr/local/etc/apachepwds  
+        Require valid-user  
+    - use `htpasswd` tool to create users
+        - `htpasswd -c /usr/local/etc/apachepwds [username]` to create file for first time 
+    - restart server
+- Per-Directory config with .htaccess
+    - works like a `<Directory>` block for the directory it's inside of
+    - enabled with `AllowOverride` directive in .conf file at Global, VirtualHost, or Directory level
