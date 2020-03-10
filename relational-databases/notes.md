@@ -11,3 +11,13 @@
         - what kinds of analysis and reports would you like to be able to review
     
     - https://app.quickdatabasediagrams.com/ is good tool to quickly create diagrams with datatypes and etc.
+
+- object name conventions
+    - capitalization: most RDBMSs are case insensitive, but if you use capitalization it must be consistent
+    - spacing: add complexity to scripts being written, must wrap in quotes that add complexity
+        - instead should use camelcase, hyphens, or underscoring
+    - reserved words: avoid using internal function names in table names
+    - plural vs. singular: pick a convention and stick with it
+    - avoid acronyms: use full, legible words
+
+## Chpt. 3 Data Integrity and Validation
