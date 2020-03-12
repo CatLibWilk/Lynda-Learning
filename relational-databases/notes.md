@@ -21,3 +21,12 @@
     - avoid acronyms: use full, legible words
 
 ## Chpt. 3 Data Integrity and Validation
+- establishing tables indexes
+    - can be added to any column frequently used in search and table joins
+    - adding too many will slow down searching
+    - CREATE INDEX [INDEX_NAME] ON [TABLE] [TABLE_COLUMN]
+- adding check constraints
+    - can add numerical checks such as "must be greater/less than value"
+    - character check constraints: limit acceptible values to an approved list
+        - CONSTRAINT [CONST_NAME] CHECK ([SOME_COL] = 'VALUE' OR [SOME_COL] = 'DIFF_VALUE')
+## Chpt. 4 Relationships
