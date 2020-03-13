@@ -30,3 +30,21 @@
     - character check constraints: limit acceptible values to an approved list
         - CONSTRAINT [CONST_NAME] CHECK ([SOME_COL] = 'VALUE' OR [SOME_COL] = 'DIFF_VALUE')
 ## Chpt. 4 Relationships
+- Cardinality and Optionality
+    - Cardinality: Maximum number of associated records between two tables (usually 1 or many, ie. 1-1, 1-N, N-N)
+        - eg. product has one supplier, cardinality = 1
+- Relationships
+    - 1-N: one to many
+    - 1-1: one to one
+    - N-N: many to many
+        - students to classes (students enrolled in many classes, classes have many students)
+        - typically implemented with linking table.
+            - e.g. student, classes, and student_classes table, where the latter is studentID, CourseID, and grade, with PK concatenation of student and course IDs
+- self-joins
+    - columns in same table relation
+    - model hierarchies within the same class 
+        - eg. employees table, where each row records an employee and their supervisor id, but the table also has a row for the supervisor, so its id field is referenced by other rows in the same table (as supervisor id )
+- cascading updates and deletes
+    - updates related keys when changed across tables, or deletes records when that associated key is deleted
+    - both enabling and disabling cascading can, in different circumstances, promote data integrity
+    - SQL: ON DELETE CASCADE / ON UPDATE CASCADE 
