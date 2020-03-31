@@ -48,3 +48,15 @@
     - updates related keys when changed across tables, or deletes records when that associated key is deleted
     - both enabling and disabling cascading can, in different circumstances, promote data integrity
     - SQL: ON DELETE CASCADE / ON UPDATE CASCADE 
+
+
+## Chpt. 5 Normalization
+- first form: columns only store a single piece of data
+    - eg. avoiding a comma separated list of people in a picture, by breaking out another table where the picture to person relationship is described.
+- second form: all fields in the primary key are required to determine the other, non-key fields.
+     - eg. if you have a table with composite PK of pictureID and firstname, and then add the last name as a column, this is violated because the pictureID is irrelevant to the persons last name.  Solve by: again break into two tables, one for picture person relationship, where person is an FK that is PK to a person table
+- third form: all non-key fields are independent of all other non-key fields
+    - usually occure when two fields state the same info in a different way, eg. having full state name and state abbreviation in a table 
+- when to *not normalize
+
+## Chpt. 6 SQL
