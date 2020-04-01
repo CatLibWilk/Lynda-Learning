@@ -20,3 +20,11 @@
     - log out/in to update changes
 
 ## Chpt.2 Using Docker
+- The Docker Flow
+    1. Image: every file that makes up enough of the os to do what is required
+        - see docker images with `docker images`
+    2. Container:
+        - `docker run` takes an image and transforms it into a running container with a living process
+        - `docker run -ti` makes terminal interactive
+        - an image and its running container will NOT have the same ID
+        - changes made in a running container are NOT reflected in the image.  The image stays the same always.
