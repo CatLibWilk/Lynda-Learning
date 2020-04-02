@@ -20,7 +20,7 @@
     - log out/in to update changes
 
 ## Chpt.2 Using Docker
-- The Docker Flow
+- The Docker Flow: Images to Containers
     1. Image: every file that makes up enough of the os to do what is required
         - see docker images with `docker images`
     2. Container:
@@ -28,3 +28,7 @@
         - `docker run -ti` makes terminal interactive
         - an image and its running container will NOT have the same ID
         - changes made in a running container are NOT reflected in the image.  The image stays the same always.
+- Containers to Images
+    - `docker ps -l` will show last container exited 
+    - can use `docker commit` to create a new image based on changes made to a container.
+        - eg. `docker commit [name of changed container] [new name for image]`
