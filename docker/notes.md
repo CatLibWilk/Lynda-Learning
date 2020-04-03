@@ -32,3 +32,13 @@
     - `docker ps -l` will show last container exited 
     - can use `docker commit` to create a new image based on changes made to a container.
         - eg. `docker commit [name of changed container] [new name for image]`
+
+- Running things in Docker
+    - basic command is `docker run`
+        - `docker run --rm` will run and the rm will delete the container when exited from
+    - can use `-c` to pass commands to started container eg.
+        - `docker run -ti ubuntu bash -c "sleep 5; echo all done"`
+    - `-d` runs container as `detached`, ie. leaves it running in background
+        - `docker run -d -ti ubuntu bash -c "sleep 5"` 
+    - `docker attach` jumps into a running container
+    - `docker exec` starts another process in a running container (ie. attach a/another terminal to the container)
