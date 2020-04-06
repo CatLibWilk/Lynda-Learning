@@ -42,3 +42,15 @@
         - `docker run -d -ti ubuntu bash -c "sleep 5"` 
     - `docker attach` jumps into a running container
     - `docker exec` starts another process in a running container (ie. attach a/another terminal to the container)
+- Managing Containers
+    - docker logs kept for as long as container exists
+        - check with `docker logs [container]` 
+    - stopping and removing containers
+        - `docker kill [container]` to stop a container
+        - `docker rm [container]` to remove container 
+    - resource constraints
+        - can set container to run to fixed amount of memory
+            - eg. `docker run --memory maximum-allowed-memory [image-name] [command]`
+        - limit cpu
+- Best Practices
+    - dont let containers fetch dependencies when they start
