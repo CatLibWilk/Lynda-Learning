@@ -52,5 +52,17 @@
         - can set container to run to fixed amount of memory
             - eg. `docker run --memory maximum-allowed-memory [image-name] [command]`
         - limit cpu
-- Best Practices
-    - dont let containers fetch dependencies when they start
+    - Best Practices
+        - dont let containers fetch dependencies when they start 
+        - dont leave important things in an unnamed stopped container 
+
+- Container Networking
+    - you can group containers into "private" networks 
+    - you can also expose ports to allow for connections
+    - exposing ports
+        - use `-p` to "publish" and give the container and host ports
+            - eg. `docker run -ti -p 8080:8080 ubuntu bash`
+        - you can expose ports dynamically as well, ie. the port in the container is fixed but the port on the host is chosen from available ports, allowing many containers running programs with fixed ports
+            - just leave off the host port definition, eg.  `docker run -ti -p 8080 ubuntu bash`
+            - can find the assigned hostport with `docker port [container_name]`
+            - can further specify protocol with `/[protocol]` eg. `docker run -ti -p 8080/tcp ubuntu bash`
