@@ -66,3 +66,9 @@
             - just leave off the host port definition, eg.  `docker run -ti -p 8080 ubuntu bash`
             - can find the assigned hostport with `docker port [container_name]`
             - can further specify protocol with `/[protocol]` eg. `docker run -ti -p 8080/tcp ubuntu bash`
+    - Virtual Networking in Docker
+        - check networking with `docker network ls`
+        - create a new VN `docker network create [network_name]` 
+        - run a container on a NV `docker run --rm -ti --net [netname] --name [container_name] ubuntu:14.04 bash` 
+        - can put a container on multiple networks
+            - `docker network connect [network] [container_to_connect]`
