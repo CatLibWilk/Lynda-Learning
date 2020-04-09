@@ -72,3 +72,9 @@
         - run a container on a NV `docker run --rm -ti --net [netname] --name [container_name] ubuntu:14.04 bash` 
         - can put a container on multiple networks
             - `docker network connect [network] [container_to_connect]`
+    - legacy linking
+        - links all ports from one machine to another, only in one direction
+
+- Managing Images
+    - list downloaded images: `docker images`
+    - clean up images: `docker rmi [image_id]`  
