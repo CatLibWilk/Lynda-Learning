@@ -78,3 +78,14 @@
 - Managing Images
     - list downloaded images: `docker images`
     - clean up images: `docker rmi [image_id]`  
+
+- Volumnes
+    - Virtual disks that you can store data in and share between containers and containers->host
+    - `persistent`: created to store data accessible between container and host, but remain after container deleted
+    - `ephemeral`: only exist as long as a container is useing it 
+    - start a container and share a folder in it: `docker run -ti -v full/path/to/folder:/path/in/container ubuntu bash`
+        - ie. `-v` is the volume argument
+    - sharing between containers
+        - use `volumes-from`
+            - so if one container has some data in it, then run another and get its volumes
+                - `docker run -it --volumes-from [container_with_data] ubuntu bash`
