@@ -89,3 +89,8 @@
         - use `volumes-from`
             - so if one container has some data in it, then run another and get its volumes
                 - `docker run -it --volumes-from [container_with_data] ubuntu bash`
+
+- Registries
+    - registries are pieces of software that manage and distribute images
+    - search with `docker search [keyword]`
+    - log in with `docker login` then `docker pull [imagename]` to get image 
