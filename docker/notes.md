@@ -94,3 +94,11 @@
     - registries are pieces of software that manage and distribute images
     - search with `docker search [keyword]`
     - log in with `docker login` then `docker pull [imagename]` to get image 
+
+## Chpt.3 Building Images
+- Dockerfiles: small programs to build a docker image
+    - built with `docker build -t [name_of_resulting_image] .`
+    - docker caches each step in the program, so between builds if nothing changes in a line, the process skips that command
+    - put parts of code that change the most at the end of the dockerfile 
+    - dockerfiles are *not* shell scripts, processes that you start on one line wont be running on the next line
+- Building Dockerfiles
