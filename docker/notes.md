@@ -101,4 +101,19 @@
     - docker caches each step in the program, so between builds if nothing changes in a line, the process skips that command
     - put parts of code that change the most at the end of the dockerfile 
     - dockerfiles are *not* shell scripts, processes that you start on one line wont be running on the next line
-- Building Dockerfiles
+- Building Dockerfile Syntax
+    - `FROM` tells what container to start from
+        - must be first expression in dockerfile
+    - `MAINTAINER` defines author of file
+    - `RUN`run line command, wait for it to finish and save result
+        - eg. `RUN unzip install.zip /opt/install/`
+    - `ADD` 
+        - can use to add local files, contents of an archive (eg. .tar file)
+    - `ENV` sets environment variables, both during the build and in container run from resulting image
+    - `ENTRYPOINT` specifies the start of command to run
+        - so if entrypoint is `ls`, then anything added to end of run command for the container is considered argument of `ls ` command in the running container
+    - `CMD` specifies the command to run, replaced by anything added to end of `run` statement
+    - `EXPOSE` maps ports in container
+    - `VOLUMES` defines shared or ephemeral volumes
+        - eg. `VOLUME ["/host/path/" "/container/path"]`
+    - `WORKDIR` sets the directory the container starts in 
