@@ -117,3 +117,16 @@
     - `VOLUMES` defines shared or ephemeral volumes
         - eg. `VOLUME ["/host/path/" "/container/path"]`
     - `WORKDIR` sets the directory the container starts in 
+- Multiproject Dockerfiles
+    - can have an image that has all the dependencies and etc. needed, and a copy of it with minimal deployable functionality, so can copy the `full` version into a deployable version that is much smaller.  
+    - eg.   
+    ```
+    FROM ubuntu:16.04 as builder <-- "builder" is given name for image to copy later
+    RUN apt-get update
+    RUN apt-get install curl -y
+    RUN curl google.com | wc -c > charcount.txt
+
+    FROM alpine <-- `alpine` is a minimal linux instance
+    COPY --from=builder /charcount.txt /charcount.txt
+    ENTRYPOINT echo characters on google homepage; cat charcount.txt
+    ```
