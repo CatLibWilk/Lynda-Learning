@@ -130,3 +130,23 @@
     COPY --from=builder /charcount.txt /charcount.txt
     ENTRYPOINT echo characters on google homepage; cat charcount.txt
     ```
+## Chpt. 4 Under the Hood
+- Networking and Namespaces
+    - docker uses bridges to create virtual networks in your computer
+    - `--net=host` in `docker run` command gives container access to host network
+ - Namespaces: complete network isolation to different processes in the system
+
+ ## Chpt. 5 Orchestration
+ -  `docker save/load`: saves images in docker as tar.gz
+    - eg. `docker save -o [filename].tar.gz [image_to_save] [another_image_to_save] [etc]`
+    - eg. `docker load -i [filename].tar.gz` to extract images
+    - Important for migrating images between storage types
+        - ie. if you switch backend storage engines in docker, you need to save and (re)load your images
+
+- Docker Compose
+    - works for single machine coordination
+    - designed for testing and dev, not production
+- Kubernetes
+    - containers run programs
+    - pods are groups of containers
+    - services make pods discoverable to others
