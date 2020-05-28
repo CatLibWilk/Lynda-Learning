@@ -79,7 +79,7 @@
     - list downloaded images: `docker images`
     - clean up images: `docker rmi [image_id]`  
 
-- Volumnes
+- Volumes
     - Virtual disks that you can store data in and share between containers and containers->host
     - `persistent`: created to store data accessible between container and host, but remain after container deleted
     - `ephemeral`: only exist as long as a container is useing it 

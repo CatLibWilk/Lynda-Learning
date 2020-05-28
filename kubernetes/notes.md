@@ -51,7 +51,7 @@ def: software allowing for automation, deployment, scaling of applications on gr
     - kube-proxy: reflects services as defined on each node, handles forwarding across several backends
         - three modes: userspace, iptables, and ipvs
 
-### Chpt. 3 Kubernetes Setup
+## Chpt. 3 Kubernetes Setup
 - install/have running docker, a hypervisor (virtualbox), kubectl, minikube
 - hello world startup
     - start minikube: `minikube start`
@@ -59,3 +59,15 @@ def: software allowing for automation, deployment, scaling of applications on gr
     - pull image and run: `kubectl run [name] --image=karthequian/helloworld --port=80`
     - expose service: `kubectl expose pod [name] --type=NodePort`
     - bring up service in browser: `minikube service [name]`
+- starting an application from deployment yaml file: `kubectl create -f filename.yml`
+
+## Chpt. 4 Labels, Upgrades, Healthchecks
+- add labels: `kubectl label [podname] [label] --overwrite`
+    - eg. `kubectl label helloworldapp app=helloworld --overwrite`
+- delete labels: `kubectl label [labelname]-`
+- search by label: `kubectl get pods --selector [labelname]=[labelval]`
+    - search with several selectors: `kubectl get pods --selector [labelname]=[labelval],[labelname]=[labelval]`
+        - use `!=`for NOT in searching
+    - IN selector
+        - `kubectl get pods --selector [labelname] in (lorange, hirange)`
+            - eg. `kubectl get pods --selector 'release-version in (1.0,2.0)'`
