@@ -71,3 +71,33 @@ def: software allowing for automation, deployment, scaling of applications on gr
     - IN selector
         - `kubectl get pods --selector [labelname] in (lorange, hirange)`
             - eg. `kubectl get pods --selector 'release-version in (1.0,2.0)'`
+
+## Chpt. 5 Advanced Kubernetes
+- configuration data
+    - `kubectl create configmap [name] --from-literal=[env_name]=[env_value]`
+        - eg. `kubectl create configmap logger --from-literal=log_level=debug`
+- secrets
+    - create secret: `kubectl create secret generic [secname] --from-literal=[secname]=[secret]`
+        - eg. `kubectl create secret generic apikey --from-literal=apikey=12345`
+    - to use, in `deploy.yaml` file for application, refer to secret under `env` as `secretKeyRef`
+        -eg. ...  
+             env:  
+             - name: api_key  
+               valueFrom:  
+                 secretKeyRef:  
+                   name: apikey  
+                   key:  api_key  
+
+## Chpt. 6 Advanced topics
+- Running in production
+    - see Kelsey Hightower "Kubernetes the Hard Way" github
+    - most common way to install: using `kubeadm` tool
+        - provision master host with docker and kubernetes distro
+        - run `kubeadm init`, which starts kubeadm, provisions kubernetes control plane, and provides join token
+        - run `kubeadm join` with join token on each worker node for node to join cluster 
+        - install pod network
+    - for deployment on AWS infrastructure, use `kops` tool 
+
+- Namespaces
+    - allows for multi-tenancy of cluster
+    - k8 allows for multiple virtual clusters backed by same physical cluster
