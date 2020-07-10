@@ -1,0 +1,17 @@
+version: '3.7'
+services:
+  # name of service
+  website:
+   # build here because building an image, if existing image, 'image'
+   build:
+    # filepath to docker file from current dir
+    context: . 
+   # name image when built  
+   image: tada:test
+   # name container when run
+   container_name: tada.com
+   ports:
+    - 80:80
+
+
+# run with `docker-compose up`
