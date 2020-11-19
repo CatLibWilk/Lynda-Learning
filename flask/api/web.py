@@ -1,0 +1,3 @@
+def website():
+    # return '<!doctype html><html lang="en" class="no-js"><body><div class="headline"><div><a href="/" id="logo">HTML5 Templates</a><div class="description"><h1>Simple Page Layout With Header, Footer and Sidebar</h1><p>A minimalist responsive template that lists HTML5 sectioning elements: header, nav, section, main, article, aside, footer, address. <br />Download the zipped package, change the content and adjust the design if necessary.</p></div></body></html>'
+    return '<h1>Hellow World</h1>'
