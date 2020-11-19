@@ -12,6 +12,11 @@ services:
    container_name: tada.com
    ports:
     - 80:80
-
+  unit-tests: 
+    volumes: 
+      - "$PWD:/apps"
+    build:
+      context:
+      dockerfile: rspec.dockerfile
 
 # run with `docker-compose up`
