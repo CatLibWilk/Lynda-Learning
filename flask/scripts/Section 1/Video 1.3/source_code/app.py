@@ -49,7 +49,7 @@ app.add_url_rule('/api/candidate', 'candidate', candidate)
 
 @app.route("/api/candidate/<string:id>", methods=["GET"])
 def candidate_by_id(id):
-	candidate = DATA_PROVIDER.get_candidate(id);
+	candidate = DATA_PROVIDER.get_candidate(id)
 	if candidate:
 		return jsonify({"candidate": candidate})
 	else:
