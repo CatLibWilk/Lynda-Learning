@@ -12,3 +12,12 @@ Flask (microservice for website and api dev) uses:
         -  2nd parameter (candidate) - endpoint  
 	    - 3rd parameter (candidate) - function which is executed  
         - app.add_url_rule('/api/candidate', 'candidate', candidate)  
+
+## using templates (see section 1, video 1.4 for templates and static code)
+- templating uses Jinja, which uses block expressions (like handlebar/express)
+    - eg. { %block head % }...{ %endblock% }
+    - double {{}} used for string-literal-like things
+        - eg. `<li><a href="{{url_for('page_index')}}">Home</a></li>`
+    - use `extends` keyword to build out from a base template for another page
+        - eg. `candidate.html` extends `layout.html`
+        - defines the base template and then can override previously-defined blocks
