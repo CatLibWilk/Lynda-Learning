@@ -21,3 +21,19 @@ Flask (microservice for website and api dev) uses:
     - use `extends` keyword to build out from a base template for another page
         - eg. `candidate.html` extends `layout.html`
         - defines the base template and then can override previously-defined blocks
+    - `render template` method used to render pages
+    - `add_url_rule` used to set up routes
+    - to use a method as a template filter (eg. the senior_candidate function in the app.py file), must append @app.template_filter(name_of_filter) decorator 
+
+
+### From Full-stack Web Dev Flask course
+- structure of application in this course is:
+    - top: overall directory holding everyting, containing:
+        - `requirements.txt`
+        - virtual environment 
+        - `.flaskenv` file with environment variables
+        - 
+- application package (directory with application files) includes:
+    - `__init__.py` file
+    - templates directory
+    - static directory (used for images/js/css etc.)
