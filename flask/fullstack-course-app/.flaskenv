@@ -1,2 +1,2 @@
 FLASK_ENV=development
-FLASK_APP=main.py
+FLASK_APP=/Users/andrewwilk/Desktop/Lynda-Learning/flask/fullstack-course-app/main.py

@@ -32,6 +32,7 @@ Flask (microservice for website and api dev) uses:
         - `requirements.txt`
         - virtual environment 
         - `.flaskenv` file with environment variables
+        - `application` package with the app scripts, static files and template (see below)
         - 
 - application package (directory with application files) includes:
     - `__init__.py` file
