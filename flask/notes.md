@@ -38,3 +38,7 @@ Flask (microservice for website and api dev) uses:
     - `__init__.py` file
     - templates directory
     - static directory (used for images/js/css etc.)
+
+- `includes`
+    - create `includes` directory in the static folder, can use include to use same element across all pages, eg. a footer
+        - use code block to include: `{ %include "includes/footer.html" % }
