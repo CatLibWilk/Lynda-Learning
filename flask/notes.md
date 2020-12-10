@@ -42,3 +42,24 @@ Flask (microservice for website and api dev) uses:
 - `includes`
     - create `includes` directory in the static folder, can use include to use same element across all pages, eg. a footer
         - use code block to include: `{ %include "includes/footer.html" % }
+
+- if/else codeblocks
+    - wrap html elements in `{% if [something] %}...{% else %}...{% end %}`
+
+- `render_template` params
+    - after the name of the template to render, can pass other arguments, such as a variable to be used in an if/else block 
+
+- `url_for`
+    - used for dynamic links, ie. in a navbar, the <li>'s `href` could point to a static file to render, like `index.html` or `contact.html`.  Then if the filename changes you need to manually update the links. 
+        - instead use `href="{{ use_url(func_name) }}"`
+        - eg.
+            - if the function that returns `render_tempate('index.html')` = `def index():`
+                - then a list item that links to that page will look like:  
+                    - `<li href="{{ use_url(index) }}">Homepage</li>
+
+## Templating
+- base template
+    - create html file with the things that will be the same across all pages (eg. the <head> outer <html> etc.)
+    - include `{% block content %}...{% endblock %}` wrapper for where unique content from other pages will go
+    - then on unique pages, put `{% extends "name_of_base_template" %}` at top of html file
+        - wrap unique content with `{% block content %}...{% endblock %}` (n.b. "content" in block content can be whatever keyword you use in the base template file, but `content` is standard)
