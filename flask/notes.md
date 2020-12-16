@@ -61,5 +61,40 @@ Flask (microservice for website and api dev) uses:
 - base template
     - create html file with the things that will be the same across all pages (eg. the <head> outer <html> etc.)
     - include `{% block content %}...{% endblock %}` wrapper for where unique content from other pages will go
-    - then on unique pages, put `{% extends "name_of_base_template" %}` at top of html file
+    - then on unique pages ( ie. `child templates` ), put `{% extends "name_of_base_template" %}` at top of html file
         - wrap unique content with `{% block content %}...{% endblock %}` (n.b. "content" in block content can be whatever keyword you use in the base template file, but `content` is standard)
+
+- passing data to template
+    - can pass args/data to template from render function by adding to `render_template` function
+        - eg. `return render_template( 'index.html', homepage_data )`
+    - in template, iterate over passed-in data with forloop block `{% for data in homepage_data %}...{% endfor %}`
+        - within forloop, use double-bracket expression to dynamically insert data into html elements
+            - eg. `<td scope="row">{{ homepage_data["course_name"] }}</td>`
+    - for things like adding "active" class to a button in a navbar for page you're currently on, can add if block to an html element
+        - eg.  
+        ```
+        render_template('index.html', index=True)`... 
+        <li class="nav-item"><a href="{{ url_for('index')" class="nav-link {% if index %}active{% endif %}"}}>Home</a></li>
+        ```
+
+## URL variables
+- can pass variables through URL ( eg. course id at end of `example.com/courses/111` ) like so:  
+    - @app.routes('/courses/<id>') and then the variable declared as arg of function that renders template
+        - def `courses(id):`
+    - then pass within the `render_template` function call  
+        - eg. `return render_template('courses.html', id=id)  
+    - and use dynamic declaration (double curly bracket) in template to render  
+        - eg. `<h1>Course No. {{ id }}</h1>`
+
+## GET request 
+- if you have something like an `enrollment` template, and a route defined for it, you can set up a <form> with attributes `action={{url_for('enrollment')}}` and `method=GET` and then <input> elements with attribute `value={{data['some_data']}}`
+    - then in route definitions, in function that renders `enrollment` template, receive data with `request` python objects eg
+    ```
+    def enrollment():
+        id = request.args.get('courseID') ##courseID is value of `name` attribute in form's input element
+        name = request.args.get('courseName')
+
+        return render_template("enrollment.html", data={"id":id, "name":name})
+    ```
+    - and then in template, use dynamic declaration to use data values eg.
+        - <p>You are enrolled in {{ data.courseName }} </p>
