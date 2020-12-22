@@ -98,3 +98,30 @@ Flask (microservice for website and api dev) uses:
     ```
     - and then in template, use dynamic declaration to use data values eg.
         - <p>You are enrolled in {{ data.courseName }} </p>
+
+    - GET will work without explicit declaration of GET method usage in the rendering function (ie enrollment()) decorator, but for others, and if using multiple, need to declare 
+    ```
+    @app.route('/enrollment', METHODS=['GET', 'POST'])
+    def enrollment():...
+    ```
+
+## POST
+- pretty much the same as GET, but need to explicitly declare the method in the app.route decorator, and to get passed data need to use `request.form.get` instead of `request.args.get`
+
+## connecting MongoDB
+- in `__init__.py`:
+```
+from flask_mongoengine import MongoEngine` in `__init__.py
+db = MongoEngine()
+db.init_app(app)
+```
+- in `routes.py`
+```
+from application import app, db
+```
+- then to define tables or "documents" in mongod parlance, create classes with `db.Document` passed as arg
+```
+class User( db.Document ):
+    user_id = db.IntField(unique=True)
+    name = db.StringField(max_length=50)
+```
