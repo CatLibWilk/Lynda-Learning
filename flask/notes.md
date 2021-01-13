@@ -125,3 +125,49 @@ class User( db.Document ):
     user_id = db.IntField(unique=True)
     name = db.StringField(max_length=50)
 ```
+
+## using forms module (  application.forms )
+```
+from application.forms import LoginForm, RegisterForm
+```
+- in render function, instantiate with `form = LoginForm()` and pass to `render_tempate` with `form=form` arg.
+- in the template use double-brackets to create html elements ala
+```
+            <form name="login" action="" method="post" novalidate>
+                {{ form.hidden_tag() }}
+
+                <p>
+                    {{ form.email.label }}<br>
+                    {{ form.email(size=35) }}
+                    {% for error in form.email.errors %}
+                        <span class="error-message">{{ error }}</span>
+                    {% endfor %}
+                </p>
+                <p>
+                    {{ form.password.label }}<br>
+                    {{ form.password(size=15) }}
+                    {% for error in form.password.errors %}
+                        <span class="error-message">{{ error }}</span>
+                    {% endfor %}
+                </p>
+
+                <p>
+                    {{ form.submit() }}
+                </p>
+
+            </form>
+```
+
+## Login Sessions and Authentication
+- 2 login modules: `flask-session` and `flask-login`
+    - `flask-session` uses a session object to store user info
+        - implemented on top of cookies and signs cookies in-crypto
+        ```
+        session['key'] = value  ## set key value
+        session.get('key')  ## get key
+
+        session.pop('key', None) ## destroy session
+        session.['key'] = False  ## destroy session
+        ```
+    - `flask-login` more secure and connects directly to backend
+    - in `config.py`, replace 'secret-string' with string generated from running `print(os.urandom(16))`
