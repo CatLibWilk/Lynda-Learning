@@ -162,6 +162,7 @@ from application.forms import LoginForm, RegisterForm
 - 2 login modules: `flask-session` and `flask-login`
     - `flask-session` uses a session object to store user info
         - implemented on top of cookies and signs cookies in-crypto
+        - `from flask import session`
         ```
         session['key'] = value  ## set key value
         session.get('key')  ## get key
@@ -171,3 +172,34 @@ from application.forms import LoginForm, RegisterForm
         ```
     - `flask-login` more secure and connects directly to backend
     - in `config.py`, replace 'secret-string' with string generated from running `print(os.urandom(16))`
+
+## REST
+- `Flask-RESTPlus` extension simplifies creation of API in flask app
+- add to` __init__.py`:
+```
+from flask_restplus import Api
+...
+api = Api() ## instantiate
+...
+api.init_app( app ) ##initialize with the `app` passed in as argument
+```
+- in `routes.py`:
+```
+from application import api
+from flask_restplus import Resource
+```
+- in `routes.py` define all the api routes with decorated classes:
+```
+@api.route('/api')
+class GetandPost( Resource ):
+    def get( self ):
+        return jsonify( User.objects.all() ) ## route is just `api` with no params, so return all data
+
+##route with params
+@api.route('api/<idx>')
+class GetUpdateAndDelete( Resource ):
+    def get( self,idx ):
+        return jsonify( User.objects( id=idx ) )
+
+
+```
