@@ -32,3 +32,24 @@ class MyClass:
 ```
 - `static methods`: not many great use-cases, but one is where you dont need to access object/class properties, but where the method should belong to the class ("namespacing methods"), rather than creating a global function
     - used with `Singleton Design`: ie. where only one instance of particular variable/object is ever createds
+        - eg from course: Book class will have method to track of a list of books created, 
+        ```
+        @staticmethod
+        def getbooklist():
+            if Book.__booklist == None:
+                Book.__booklist = []
+            return Book.__booklist
+        ```
+        - could just have global list variable and append to it, but this keeps it expolicitly associated with book class
+
+## inheritence
+- in children classes, use the `super().__init__( vars_to_init )` in the child's `__init__` to initialize the variables from the parent class
+
+- `abstract base classes`: tool for enforcing set of constraints on consumers of parent classes
+    - want parent-like class to build other classes with but:
+        - dont want consumers of base class to be able to instantiate the base class itself
+        - enforce constraint that there are certain methods in base class that children HAVE TO implement
+    - need ABC module (abstract base class): `from ABC import ABC, abstractmethod`
+        - parent class inherits from ABC: `def Parent( ABC ):...`
+        - use `@abstractmethod` decorator to tell python that subclasses must implmement this method
+            - ie. will force you to define the method in subclass (override parent's definition)
