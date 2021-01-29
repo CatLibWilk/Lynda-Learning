@@ -53,3 +53,14 @@ class MyClass:
         - parent class inherits from ABC: `def Parent( ABC ):...`
         - use `@abstractmethod` decorator to tell python that subclasses must implmement this method
             - ie. will force you to define the method in subclass (override parent's definition)
+
+- multiple inheritence
+    - python allows subclasses to inherit from more than one base class
+    - if each base class defines the same attribute, problems
+        - python uses  `method resolution order` when handling method class, looks first in the current class, then in the inherited classes `in the order given as arguments at subclass instantiation`
+            - so if `MySubClass( B, A )`, and B and A have the same attribute, B's will be the one classed/referenced
+            - python method `__mro__` will print the order: `print( MySubClass.__mro__ )`
+
+## Interfaces
+    - interface: by implemeneting an interface, a class makes "contract" to provide a certain behavior or capability
+        - so have abrstract base class with a particular function (like returning JSON), and inherit it along with main base class among your subclasses, now the subclass must define it's version of the interface-baseclass ( I still dont get why it wou;dnt just be an abstract method of the baseclass, or why this is useful when the implementation of the abc.method could be completely different in every subclass, but whatever )
