@@ -62,5 +62,26 @@ class MyClass:
             - python method `__mro__` will print the order: `print( MySubClass.__mro__ )`
 
 ## Interfaces
-    - interface: by implemeneting an interface, a class makes "contract" to provide a certain behavior or capability
-        - so have abrstract base class with a particular function (like returning JSON), and inherit it along with main base class among your subclasses, now the subclass must define it's version of the interface-baseclass ( I still dont get why it wou;dnt just be an abstract method of the baseclass, or why this is useful when the implementation of the abc.method could be completely different in every subclass, but whatever )
+- interface: by implemeneting an interface, a class makes "contract" to provide a certain behavior or capability
+    - so have abrstract base class with a particular function (like returning JSON), and inherit it along with main base class among your subclasses, now the subclass must define it's version of the interface-baseclass ( I still dont get why it wou;dnt just be an abstract method of the baseclass, or why this is useful when the implementation of the abc.method could be completely different in every subclass, but whatever )
+
+## composition
+- can build complex objects from simpler ones with composition rather than inheritance, whereby there is a "has" relationship (book has author) rather than the "is" relationship inherent in inheritence (Book is publication). 
+    - so eg. have an Author and Book class:
+    ```
+    class Book:
+    def __init__(self, title, price, author=None):
+        self.title = title
+        self.price = price
+
+        # Use references to other objects, like author
+        self.author = author
+
+class Author:
+    def __init__(self, fname, lname):
+        self.fname = fname
+        self.lname = lname
+
+leo_tolstoy = Author('Leo', 'Tolstoy')
+war_and_peace = Book('War and Peace', '30', leo_tolstoy)
+```
