@@ -70,18 +70,38 @@ class MyClass:
     - so eg. have an Author and Book class:
     ```
     class Book:
-    def __init__(self, title, price, author=None):
-        self.title = title
-        self.price = price
+        def __init__(self, title, price, author=None):
+            self.title = title
+            self.price = price
 
-        # Use references to other objects, like author
-        self.author = author
+            # Use references to other objects, like author
+            self.author = author
 
-class Author:
-    def __init__(self, fname, lname):
-        self.fname = fname
-        self.lname = lname
+    class Author:
+        def __init__(self, fname, lname):
+            self.fname = fname
+            self.lname = lname
 
-leo_tolstoy = Author('Leo', 'Tolstoy')
-war_and_peace = Book('War and Peace', '30', leo_tolstoy)
-```
+    leo_tolstoy = Author('Leo', 'Tolstoy')
+    war_and_peace = Book('War and Peace', '30', leo_tolstoy)
+    ```
+
+## Magic Methods
+- python associates a set of methods with every class
+    - can be overridden
+- string methods
+    - __str__(returns string about object) and __repr__ (object representation)
+- comparison methods
+    - cant just go `instantiation1 == instantiation2` if to check if two objects are the same (ie. have the same values/variables). Python doesn't check variable by variable on objects
+        - have to define the __eg__ function in class (eg):
+        ```
+        def __eq__(self, value):
+            if not isinstance(value, Book):
+                raise ValueError("Can't compare book to non-book type")
+
+            return (self.title == value.title and
+                    self.author == value.author and
+                    self.price == value.price)
+        ```
+        - can define similar methods for all the comparison types (greater than, less than, etc. )
+        - once less than is defined, can use the `.sort()` method on a list of objects for example
