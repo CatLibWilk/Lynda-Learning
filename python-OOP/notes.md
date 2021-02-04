@@ -105,3 +105,50 @@ class MyClass:
         ```
         - can define similar methods for all the comparison types (greater than, less than, etc. )
         - once less than is defined, can use the `.sort()` method on a list of objects for example
+
+- attribute access
+    - can alter how class attributes are accessed and handled with __getattribute__
+        - eg. when price called, return price with discount applied automatically
+        ```
+        class Book:
+        def __init__(self, title, author, price):
+            super().__init__()
+            self.title = title
+            self.author = author
+            self.price = price
+            self._discount = 0.1
+
+        # Called when an attribute is retrieved. Be aware that you can't
+        # directly access the attr name otherwise a recursive loop is created
+        def __getattribute__(self, name):
+            if (name == "price"):
+                p = super().__getattribute__("price")
+                d = super().__getattribute__("_discount")
+                return p - (p * d)
+            return super().__getattribute__(name)
+        ```
+        - have to directly access attribute name with `super().__getattribute__` because otherwise will loop recursively
+    - can do the same with controlling how attributes are set ( __setattr__ )
+        - eg. 
+        ```
+        def __setattr__(self, name, value):
+            if (name == "price"):
+                if type(value) is not float:
+                    raise ValueError("The 'price' attribute must be a float")
+            return super().__setattr__(name, value)
+        ```
+        
+## Data Classes
+- starting with python 3.7, can automate the creation and managing of classes that mostly exist just to hold data with `data classes`
+    - import: `from dataclasses import dataclass`
+    - use `@dataclass` decorator and then just declare attributes and their data types
+    ```
+    @dataclass
+    class Book:
+        title: str
+        author: str
+        pages: int
+        price: float
+    ```
+    - decorator rewrites code in compile to effectively reinsert the __init__ function and assign to `self` params
+- dataclasses also automatically implement the `__repr__` and `__eq__` methods 
