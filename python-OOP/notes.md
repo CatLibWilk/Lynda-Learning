@@ -152,3 +152,21 @@ class MyClass:
     ```
     - decorator rewrites code in compile to effectively reinsert the __init__ function and assign to `self` params
 - dataclasses also automatically implement the `__repr__` and `__eq__` methods 
+- `dataclass` decorator lets you customize additional properties that rely on other properties after the object has been initialized
+    - ie. if you have attributes that rely on other attributes (eg. `price` = `self.base_price` - `self.discount`), cant define as normal because the decorator eliminates the usual `__init__` function. 
+    - `dataclass` has the `__post_init__` method
+    - eg.
+    ```
+    @dataclass
+    class Book:
+        title: str
+        author: str
+        pages: int
+        price: float
+
+        # the __post_init__ function lets us customize additional properties
+        # after the object has been initialized via built-in __init__
+        def __post_init__(self):
+            self.description = f"{self.title} by {self.author}, {self.pages} pages"
+    ```
+    
