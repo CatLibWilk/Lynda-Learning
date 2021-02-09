@@ -170,3 +170,12 @@ class MyClass:
             self.description = f"{self.title} by {self.author}, {self.pages} pages"
     ```
     
+    ## Immutability
+    - can make objects immutable with the @dataclass decorator
+        - set `frozen = true` in the decorator arguments
+        ```
+        @dataclass( frozen = true )
+        class ImmutableClass():
+            value1: 'value1 '
+            ...
+        ```
