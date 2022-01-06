@@ -1,0 +1,1 @@
+9/21 to https://docs.djangoproject.com/en/3.2/intro/tutorial03/

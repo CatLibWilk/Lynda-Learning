@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 import sys
 from db_form.apps.core.versioning import get_git_changeset_timestamp
+
 # ...
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -39,12 +40,15 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'db_form.apps.form',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.contenttypes',
+    'myproject.apps.core',
 ]
 
 MIDDLEWARE = [
