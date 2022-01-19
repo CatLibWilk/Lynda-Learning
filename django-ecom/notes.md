@@ -49,7 +49,24 @@
     - add to admin config as well
         - import models into admin.py
         - add: `admin.site.register( [model_name] )` for each model
-
+    
+- categories
+    - create tuple of 2-tuples outside of any model like so, where the first value is what's stored in DB, 2nd is the display value
+    ```
+        CATEGORY_CHOICES = (
+            ( 'S', 'Shirt' ),
+            ( 'SW', 'Sportwear' ),
+            ( 'OW', 'Outerwear' ),
+        )
+    ```
+    - reference in models like so
+    ```
+        category = models.CharField( choices=CATEGORY_CHOICES, default = 'S', max_length = 2 )
+    ```
+    - in templates, can get the display value with `.get_[category_name]_display` function
+    ```
+        {{ item.get_category_display }}
+    ```
 # Views
 - create `item_list` view like so:
     ```
@@ -71,6 +88,18 @@
             path( '', include( 'core.urls', namespace = 'core' ) )
         ]
     ```
+- class-based views can reduce code
+    - `from django.views.generic import ListView, DetailView`
+    - for a list-based view (like the one displaying all products on homepage)
+        ```
+            class HomeView( ListView ):
+                model = [model_name]
+                template_name = 'home.html'
+        ```
+    - in `urls.py` give as `HomeView.as_view( )` in url path def
+    - in templates, the object to loop through is `object_list`
+        - eg. `{% for item in object_list %}`
+
 # Templates
 - create `item_list.html` in `templates` directory
     ```
@@ -106,4 +135,78 @@
         MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
     ```
 
-( To 15:00 ) - 1/5/22 - Couldn't figure out all the changes that happened between loading the MDN templates and breaking them out into different templates, making the routes, etc ( ie. what's shown between 15 min and the 'add item to cart' title ). Going to take a break from this tutorial and look at a more beginner-friendly one
+# building individual product page linking
+- need to add `slug` field and `get_absolute_url` method to Item model
+    - `slug = models.SlugField( default = 'default' )`
+    - method
+        ```
+            def get_absolute_url( self ):
+                return reverse("core:product", kwargs = {
+                    'slug': self.slug 
+                } )
+        ```
+        - `reverse` first argument is: namespace (ie. app ) - colon - name given in url definition
+
+- add slug to url def
+    - `path('product/<slug>/', ItemDetailView.as_view( ), name='product'),`
+
+- alter href links in templates
+    - `href="{{ item.get_absolute_url }}"`
+
+
+# Adding Items to cart
+- basic steps
+    - create orderitem from item
+    - assign order item to order if user has order/create new if not
+    - be able to remove item
+
+- define `add_to_cart` function
+    - takes request and slug of item as args
+    ```
+    def add_to_cart( request, slug ):
+        item = get_object_or_404( Item, slug=slug ) !<--- get item object by slug
+        ##use get_or_create so that ordering an item more than once just changes quantity of existing, not creates new
+        order_item, created = OrderItem.objects.get_or_create( !<----- !
+            item = item,
+            user = request.user,
+            ordered = False
+        )
+        order_qs = Order.objects.filter( user = request.user, ordered = False ) !<--- see if user has order!
+        
+        if order_qs.exists( ):
+            order = order_qs[ 0 ]
+            # check if item is already in order
+            if order.items.filter( item__slug = item.slug ).exists( ): !<--- if item already in order, increase quantity
+                order_item.quantity += 1
+                order_item.save( )
+            else: !<--- if item not in order, add to order!
+                order.items.add( order_item )
+
+        else: !<--- create order if user doesnt have one !
+            ordered_date = timezone.now( )
+            order = Order.objects.create( user = request.user, ordered_date = ordered_date )
+            order.items.add( order_item )
+
+        return redirect( "core:product", slug = slug ) !<--- after add to order, redirect/refresh to same product page
+    ```
+- add add_to_cart to urls.py
+    ```
+    ...
+        path('add-to-cart/<slug>/', add_to_cart, name='add-to-cart'),
+    ...
+    ```
+-  create `get_add_to_cart_url` shortcut method in Item class
+    - returns URL to add to cart with the item's slug
+    ```
+    def get_add_to_cart_url( self ):
+        return reverse("core:add-to-cart", kwargs = {
+            'slug': self.slug 
+        } )
+    ```
+- in template, make submit button with `get_add_to_cart_url` in href of <a> tag
+    ```
+    <a href="{{ object.get_add_to_cart_url }}" class="btn btn-primary btn-md my-0 p">Add to cart
+        <i class="fas fa-shopping-cart ml-1"></i>
+    </a>
+    ```
+( to 45:00 )
