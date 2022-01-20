@@ -209,4 +209,13 @@
         <i class="fas fa-shopping-cart ml-1"></i>
     </a>
     ```
-( to 45:00 )
+
+
+## messages
+- `from django.contrib import messages`
+- use
+    ```
+        messages.info( request, "Your message" )
+    ```
+
+( to 54:10 improving UI )
