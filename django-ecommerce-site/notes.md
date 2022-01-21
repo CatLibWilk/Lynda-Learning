@@ -134,6 +134,8 @@
         STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
         MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
     ```
+- to make the django-allauth templates use your project base.html, need to create an `account` directory in `templates` and create a `base.html` file containing only `{% extends "base.html %}`
+    - by default allauth uses the templates found in the allauth package (for me in .venv lib directory), but if you create an `account` directory in `templates`, then whenever you create an html file with a name matching one in the default templates (eg. login, logout, signup, etc.), allauth will use the one in the project templates.
 
 # building individual product page linking
 - need to add `slug` field and `get_absolute_url` method to Item model
@@ -218,4 +220,4 @@
         messages.info( request, "Your message" )
     ```
 
-( to 54:10 improving UI )
+( to 57:45 )
