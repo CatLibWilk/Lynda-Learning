@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -114,3 +115,6 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
+
+## crispy forms
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

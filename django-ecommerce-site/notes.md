@@ -222,3 +222,10 @@
 
 ( to 1hr )
 ## crispy-form
+- `pip install django-crispy-forms`
+- in `settings.py`
+    - register `crispy_forms` in INSTALLED_APPS
+    - add `CRISPY_TEMPLATE_PACK = 'bootstrap4'`
+- add `{% load crispy_forms_tags %}` to template being used
+- to use in view, inside <form> section, where previously would use `{{ form.as_p }}`
+now use `{{ form|crispy }}`
