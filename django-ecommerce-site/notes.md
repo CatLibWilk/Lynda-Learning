@@ -220,7 +220,6 @@
         messages.info( request, "Your message" )
     ```
 
-( to 1hr )
 ## crispy-form
 - `pip install django-crispy-forms`
 - in `settings.py`
@@ -229,3 +228,7 @@
 - add `{% load crispy_forms_tags %}` to template being used
 - to use in view, inside <form> section, where previously would use `{{ form.as_p }}`
 now use `{{ form|crispy }}`
+
+## pagination
+
+( to 1:03:00 )
