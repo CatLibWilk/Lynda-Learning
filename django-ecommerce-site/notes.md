@@ -213,14 +213,14 @@
     ```
 
 
-## messages
+# messages
 - `from django.contrib import messages`
 - use
     ```
         messages.info( request, "Your message" )
     ```
 
-## crispy-form
+# crispy-form
 - `pip install django-crispy-forms`
 - in `settings.py`
     - register `crispy_forms` in INSTALLED_APPS
@@ -229,6 +229,34 @@
 - to use in view, inside <form> section, where previously would use `{{ form.as_p }}`
 now use `{{ form|crispy }}`
 
-## pagination
+# pagination
 
-( to 1:03:00 )
+- in HomeView class, add `paginate_by` variable, value equal to number of items per page
+- in template, use `{% if is_paginated %}` block to have so numbers and back/forward arrows appear only if data needs to be paginated
+- `page_obj` object is the pagination Object, used for other conditionals like
+    - use if block with `page_obj.has_previous` to display/hide back/forward arrows
+    - set arrow/number hrefs with `href="?page={{ page_obj.previous_page_number }}`, or `.next_page_number`, `.number` (for current page), etc. 
+
+# Cart count with templatetags
+- make `templatetags` directory in core
+- create `cart_template_tags.py` file
+- `from django import template`
+- template tags must be registered
+    - .py, `register = template.Library()`
+- create function with name of tag
+    ```
+    @register.filter
+    def cart_item_count(user):
+        if user.is_authenticated:
+            qs = Order.objects.filter(user=user, ordered=False)
+            if qs.exists():
+                return qs[0].items.count()
+        return 0
+    ```
+- in template using tag (here navbar)
+    - `{% load cart_template_tags %}`
+    - use in span displaying cart count like so `{{ request.user | cart_item_count }}`
+        - ie. request.user to get current user, then pipe operator to pass that to the function defined in the tags file.
+
+# Creating Order summary
+( to 1:10:35 )
