@@ -1,6 +1,9 @@
 from tracemalloc import get_object_traceback
 from django.shortcuts import render, redirect, get_object_or_404
+from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, View
 from django.utils import timezone
 from .models import Item, OrderItem, Order
@@ -14,9 +17,25 @@ class ItemDetailView( DetailView ):
     model = Item
     template_name = 'product.html'
 
+
+class OrderSummaryView( LoginRequiredMixin, View ):
+    def get( self, *args, **kwargs ):
+        try:
+            order = Order.objects.get( user = self.request.user, ordered = False )
+            context = {
+                'object': order
+            }
+            return render( self.request, 'order_summary.html', context )
+        
+        except ObjectDoesNotExist:
+            messages.error( self.request, "You don't have an order" )
+            return redirect( "/" )
+
+    
 def CheckoutView( request ):
     return render ( request, template_name = 'checkout.html' )
 
+@login_required
 def add_to_cart( request, slug ):
     item = get_object_or_404( Item, slug=slug )
     ##use get_or_create so that ordering an item more than once just changes quantity of existing, not creates new
@@ -46,6 +65,7 @@ def add_to_cart( request, slug ):
 
     return redirect( "core:product", slug = slug )
 
+@login_required
 def remove_from_cart( request, slug ):
     item = get_object_or_404( Item, slug=slug )
 
