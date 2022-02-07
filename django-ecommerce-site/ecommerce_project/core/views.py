@@ -25,6 +25,7 @@ class OrderSummaryView( LoginRequiredMixin, View ):
             context = {
                 'object': order
             }
+
             return render( self.request, 'order_summary.html', context )
         
         except ObjectDoesNotExist:

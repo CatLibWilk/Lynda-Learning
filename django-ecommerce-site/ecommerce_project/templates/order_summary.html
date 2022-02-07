@@ -21,11 +21,28 @@
               <tr>
                 <th scope="row">1</th>
                 <td>{{ order_item.item.title }}</td>
-                <td>{{ order_item.item.price }}</td>
-                <td>{{ order_item.Quantity }}</td>
-                <td>$$$</td>
+                <td>${{ order_item.item.price }}</td>
+                <td>{{ order_item.quantity }}</td>
+                <td>${{ order_item.get_total_item_price }}</td>
+                {% endfor %}
               </tr>
-              {% endfor %}
+              {% if object.items.all %} <!--If there are any items in the order, show total, otherwise, msg that there are no items-->
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class = "font-weight-bold">TOTAL:</td>
+                <td class="text-danger font-weight-bold">${{ object.get_total }}</td>
+              </tr>
+              {% else %}
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class = "font-weight-bold">No Items in Cart</td>
+                <td></td>
+              </tr>
+              {% endif %}
             </tbody>
           </table>
         </div>
