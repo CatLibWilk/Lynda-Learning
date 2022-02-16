@@ -28,18 +28,18 @@
               </tr>
               {% if object.items.all %} <!--If there are any items in the order, show total, otherwise, msg that there are no items-->
               <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td class = "font-weight-bold">TOTAL:</td>
-                <td class="text-danger font-weight-bold">${{ object.get_total }}</td>
+                <td colspan="4" class="font-weight-bold">Order Total</td>
+                <td colspan="5" class="text-danger font-weight-bold">${{ object.get_total }}</td>
+              </tr>
+              <tr>
+                <td colspan="5">
+                  <a class="btn btn-warning text-dark" href="/checkout/">Proceed to Checkout</a>
+                  <a class="btn btn-primary text-dark ml-2" href="/">Continue Shopping</a>
+                </td>
               </tr>
               {% else %}
               <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td class = "font-weight-bold">No Items in Cart</td>
+                <td colspan=5 class="font-weight-bold">No Items in Cart</td>
                 <td></td>
               </tr>
               {% endif %}

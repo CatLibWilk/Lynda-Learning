@@ -259,4 +259,4 @@ now use `{{ form|crispy }}`
         - ie. request.user to get current user, then pipe operator to pass that to the function defined in the tags file.
 
 # Creating Order summary
-( to 1:20:10 )
+( to 1:30:15 )
