@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './index.css';
 import ReactDOM from 'react-dom';
 
@@ -11,17 +11,36 @@ import ReactDOM from 'react-dom';
 //   document.getElementById('root')
 // );
 
-function Hello({library, color}){
+function App(){
+  const [ fn, setFn ] = useState( "" )
+  const [ ln, setLn ] = useState( "" )
+
+  useEffect( () => {
+    console.log(`First Name: ${fn}`)
+  }, [fn])
+
+  useEffect( () => {
+    console.log(`Last Name: ${ln}`)
+  }, [ln])
   return (
-    <div>
-      <h1>{library} Hellow World</h1>
-      <p>{color} world</p>
-    </div>
+    <>
+    <br></br>
+    <label>
+      First Name:
+      <input value={fn} onChange={e => setFn(e.target.value)}/>
+    </label>
+    <br/>
+    <br/>
+    <label>
+      Last Name:
+      <input value={ln} onChange={e => setLn(e.target.value)}/>
+    </label>
+    </>
   )
 }
 
 
 ReactDOM.render(
-  <Hello library="React" color="yellow" />,
+  <App />,
   document.getElementById('root')
 );
