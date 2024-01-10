@@ -260,7 +260,7 @@
                 console.log(`First Name: ${fn}`)
             }, [fn])
         ```
-        - fires only on change to `fn` state variable\
+        - fires only on change to `fn` state variable
 
 - `useReducer` hook
     - reducers take in one state and return another
